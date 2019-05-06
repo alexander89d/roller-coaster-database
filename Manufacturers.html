@@ -1,83 +1,126 @@
-<h1>Manufacturers</h1>
-<br>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Roller Coaster Database - Manufacturers</title>
+        
+        <!-- Link to Bootstrap CDN stylesheet -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        
+        <!-- Link to my own stylesheet -->
+        <link rel="stylesheet" href="stylesheet.css" type="text/css">
+    </head>
+    <body>
+        <div id="pageHead">
+            <h1>Roller Coaster Database</h1>
+        </div>
+        <div id="navMenu" class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <a href="Index.html">Home</a>
+                </div>
+                <div class="col">
+                    <a href="Roller_Coasters.html">Coasters</a>
+                </div>
+                <div class="col">
+                    <a href="Features.html">List of All Features</a>
+                </div>
+                <div class="col">
+                    <a href="Coaster_Features.html">Features of Specific Coasters</a>
+                </div>
+                <div class="col">  
+                    <a href="Parks.html">Parks</a>
+                </div>
+                <div class="col">
+                    <a href="Owners.html">Park Owners</a>
+                </div>
+                <div class="col">
+                    <a href="Manufacturers.html" style="font-weight: bolder;">Manufacturers</a>
+                </div>
+            </div>
+        </div>
+        <div id="mainContent">
+            <h1>Manufacturers</h1>
+            <div>
+                <img src="coaster_by_water.jpg" class="centered-image d-block w-25" alt="Image of a coaster lit up by the water at night.">
+            </div>
+            <br>
+            <h2>Sample Data</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th> Name </th>
+                        <th> City </th>
+                        <th> State/Province </th>
+                        <th> Country </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Arrow Dynamics</td>
+                        <td>Clearfield</td>
+                        <td>UT</td>
+                        <td>United States</td>
+                    </tr>
+                    <tr>
+                        <td>Rocky Mountain Construction</td>
+                        <td>Hayden</td>
+                        <td>ID</td>
+                        <td>United States</td>
+                    </tr>
+                    <tr>
+                        <td>Bolliger & Mabillard</td>
+                        <td>Monthey</td>
+                        <td>Valais</td>
+                        <td>Switzerland</td>
+                    </tr>
+                    <tr>
+                        <td>Custom Coasters International</td>
+                        <td>West Chester</td>
+                        <td>OH</td>
+                        <td>United States</td>
+                    </tr>
+                </tbody>
+            </table>
 
-<table>
-	<thead>
- 	<tr>
-		<th> Name </th>
-		<th> City </th>
-		<th> State/Province </th>
-		<th> Country </th>
-	<tr>
-		<td>Arrow Dynamics</td>
-		<td>Clearfield</td>
-		<td>UT</td>
-		<td>United States</td>
-	<tr>
-		<td>Rocky Mountain Construction</td>
-		<td>Hayden</td>
-		<td>ID</td>
-		<td>United States</td>
-	<tr>
-		<td>Bolliger & Mabillard</td>
-		<td>Monthey</td>
-		<td>Valais</td>
-		<td>Switzerland</td>
-	<tr>
-		<td>Custom Coasters International</td>
-		<td>West Chester</td>
-		<td>OH</td>
-		<td>United States</td>
-<tbody id="tablebody">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
 
+            <form action="" method="get">
 
+                <fieldset>
+                <legend>Add a New Manufacturer</legend>
 
-</tbody>
-<table>
+                <label> Name <input type="text" name="name" id="name">	</label>
+                <br>
+                <label> City <input type="text" name="city" id="city"></label>
+                <br>
+                <label> State/Province <input type="text" name="state" id="state"></label>
+                <br>
+                <label> Country <input type="text" name="country" id="country"></label>
+                <br>
+                <br>
+                <br>
+                <br>
+                <div id="badinput"></div>
+                <input type="submit" value="Add Manufacturer" id="addsubmit"/>
+                </fieldset>
 
-<br>
-<br>
-<br>
-<br>
-<br>
+            </form>
 
-<form action="" method="get">
+            <br>
+            <br>
+            <p id="imageCitation">* All images retrieved from pixabay.com, where images are free for use and do not require attribution.</p>
+        </div>
+        <span class="sr-only">End of page content.</span>
+        
+        <!-- Scripts required for use of various Bootstrap CDN features -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-	<fieldset>
-	<legend>Add a New Manufacturer</legend>
-
-	<label> Name <input type="text" name="name" id="name">	</label>
-	<br>
-	<label> City <input type="text" name="city" id="city"></label>
-	<br>
-	<label> State/Province <input type="text" name="state" id="state"></label>
-	<br>
-	<label> Country <input type="text" name="country" id="country"></label>
-	<br>
-	<br>
-	<br>
-	<br>
-	<div id="badinput"></div>
-	<input type="submit" value="Add Manufacturer" id="addsubmit"/>
-	</fieldset>
-
-</form>
-
-<br>
-<br>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    </body>
+</html>

@@ -1,121 +1,162 @@
-<h1>Amusement Parks</h1>
-<br>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Roller Coaster Database - Parks</title>
+        
+        <!-- Link to Bootstrap CDN stylesheet -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        
+        <!-- Link to my own stylesheet -->
+        <link rel="stylesheet" href="stylesheet.css" type="text/css">
+    </head>
+    <body>
+        <div id="pageHead">
+            <h1>Roller Coaster Database</h1>
+        </div>
+        <div id="navMenu" class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <a href="Index.html">Home</a>
+                </div>
+                <div class="col">
+                    <a href="Roller_Coasters.html">Coasters</a>
+                </div>
+                <div class="col">
+                    <a href="Features.html">List of All Features</a>
+                </div>
+                <div class="col">
+                    <a href="Coaster_Features.html">Features of Specific Coasters</a>
+                </div>
+                <div class="col">  
+                    <a href="Parks.html" style="font-weight: bolder">Parks</a>
+                </div>
+                <div class="col">
+                    <a href="Owners.html">Park Owners</a>
+                </div>
+                <div class="col">
+                    <a href="Manufacturers.html">Manufacturers</a>
+                </div>
+            </div>
+        </div>
+        <div id="mainContent">
+            <h1>Amusement Parks</h1>
+            <div>
+                <img src="amusement_park.png" class="centered-image d-block w-25" alt="Drawing with a roller coaster in the background and a carousel and carnival tents in the foreground.">
+            </div>
+            <br>
+            <h2>Sample Data</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th> Name </th>
+                        <th> City </th>
+                        <th> State/Province </th>
+                        <th> Country </th>
+                        <th> Owner </th>
+                        <th> Delete? </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Cedar Point</td>
+                        <td>Sandusky</td>
+                        <td>OH</td>
+                        <td>United States</td>
+                        <td>Cedar Fair</td>
+                        <td>
+                            <form action="" method="get">
+                                <input type="hidden" name="id" value="1">
+                                <input type="Submit" value="Delete">
+                            </form>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Kings Island</td>
+                        <td>Mason</td>
+                        <td>OH</td>
+                        <td>United States</td>
+                        <td>Cedar Fair</td>
+                        <td>
+                            <form action="" method="get">
+                                <input type="hidden" name="id" value="1">
+                                <input type="Submit" value="Delete">
+                            </form>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Canada's Wonderland</td>
+                        <td>Vaughan</td>
+                        <td>ON</td>
+                        <td>Canada</td>
+                        <td>Cedar Fair</td>
+                        <td>
+                            <form action="" method="get">
+                                <input type="hidden" name="id" value="2">
+                                <input type="Submit" value="Delete">
+                            </form>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Six Flags over Texas</td>
+                        <td>Arlington</td>
+                        <td>TX</td>
+                        <td>United States</td>
+                        <td>Six Flags</td>
+                        <td>
+                            <form action="" method="get">
+                                <input type="hidden" name="id" value="3">
+                                <input type="Submit" value="Delete">
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
 
-<table>
-	<thead>
- 	<tr>
-		<th> Name </th>
-		<th> City </th>
-		<th> State/Province </th>
-		<th> Country </th>
-		<th> Owner </th>
-		
-	<tr>
-		<td>Cedar Point</td>
-		<td>Sandusky</td>
-		<td>OH</td>
-		<td>United States</td>
-		<td>Cedar Fair</td>
-		<td>
-			<form action="" method="get">
-				<input type="hidden" name="id" value="1"></input>
-				<input type="Submit" value="Delete"></input>
-			</form>
-		</td>
-	<tr>
-		<td>Kings Island</td>
-		<td>Mason</td>
-		<td>OH</td>
-		<td>United States</td>
-		<td>Cedar Fair</td>
-		<td>
-			<form action="" method="get">
-				<input type="hidden" name="id" value="1"></input>
-				<input type="Submit" value="Delete"></input>
-			</form>
-		</td>
-	<tr>
-		<td>Canada's Wonderland</td>
-		<td>Vaughan</td>
-		<td>ON</td>
-		<td>Canada</td>
-		<td>Cedar Fair</td>
-		<td>
-			<form action="" method="get">
-				<input type="hidden" name="id" value="2"></input>
-				<input type="Submit" value="Delete"></input>
-			</form>
-		</td>
-	<tr>
-		<td>Six Flags over Texas</td>
-		<td>Arlington</td>
-		<td>TX</td>
-		<td>United States</td>
-		<td>Six Flags</td>
-		<td>
-			<form action="" method="get">
-				<input type="hidden" name="id" value="3"></input>
-				<input type="Submit" value="Delete"></input>
-			</form>
-		</td>
+            <form action="" method="get">
 
-<tbody id="tablebody">
+                <fieldset>
+                <legend>Add a New Amusement Park</legend>
 
+                <label> Name <input type="text" name="name" id="name">	</label>
+                <br>
+                <label> City <input type="text" name="city" id="city"></label>
+                <br>
+                <label> State/Province <input type="text" name="state" id="state"></label>
+                <br>
+                <label> Country <input type="text" name="country" id="country"></label>
+                <br>
+                <label> Owner 
+                    <select name="owner">
+                        <option value="1">Cedar Fair</option>
+                        <option value="2">Six Flags</option>
+                        <option value="3">Koch Development Corporation</option>
+                    </select>
+                </label>
+                <br>
+                <br>
+                <br>
+                <div id="badinput"></div>
+                <input type="submit" value="Add Amusement Park" id="addsubmit"/>
+                </fieldset>
 
+            </form>
 
-</tbody>
-<table>
+            <br>
+            <br>
+            <p id="imageCitation">* All images retrieved from pixabay.com, where images are free for use and do not require attribution.</p>
+        </div>
+        <span class="sr-only">End of page content.</span>
+        
+        <!-- Scripts required for use of various Bootstrap CDN features -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-<br>
-<br>
-<br>
-<br>
-<br>
-
-<form action="" method="get">
-
-	<fieldset>
-	<legend>Add a New Amusement Park</legend>
-
-	<label> Name <input type="text" name="name" id="name">	</label>
-	<br>
-	<label> City <input type="text" name="city" id="city"></label>
-	<br>
-	<label> State/Province <input type="text" name="state" id="state"></label>
-	<br>
-	<label> Country <input type="text" name="country" id="country"></label>
-	<br>
-	<label> Owner 
-		<select name="units">
-		<option value="1">Cedar Fair</option>
-		<option value="2">Six Flags</option>
-		<option value="3">Koch Development Corporation</option>
-		</select>
-	</label>
-	<br>
-	<br>
-	<br>
-	<div id="badinput"></div>
-	<input type="submit" value="Add Amusement Park" id="addsubmit"/>
-	</fieldset>
-
-</form>
-
-<br>
-<br>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    </body>
+</html>

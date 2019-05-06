@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Roller Coaster Database - Coasters</title>
+        
+        <!-- Link to Bootstrap CDN stylesheet -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        
+        <!-- Link to my own stylesheet -->
+        <link rel="stylesheet" href="stylesheet.css" type="text/css">
+    </head>
+    <body>
+        <div id="pageHead">
+            <h1>Roller Coaster Database</h1>
+        </div>
+        <div id="navMenu" class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <a href="Index.html">Home</a>
+                </div>
+                <div class="col">
+                    <a href="Roller_Coasters.html" style="font-weight:bolder;">Coasters</a>
+                </div>
+                <div class="col">
+                    <a href="Features.html">List of All Features</a>
+                </div>
+                <div class="col">
+                    <a href="Coaster_Features.html">Features of Specific Coasters</a>
+                </div>
+                <div class="col">  
+                    <a href="Parks.html">Parks</a>
+                </div>
+                <div class="col">
+                    <a href="Owners.html">Park Owners</a>
+                </div>
+                <div class="col">
+                    <a href="Manufacturers.html">Manufacturers</a>
+                </div>
+            </div>
+        </div>
+        <div id="mainContent">
+        <h1>Roller Coasters</h1>
+        <div>
+            <img src="son_of_beast.jpg" class="centered-image d-block w-25" alt="Image of a giant wooden coaster featuring a loop.">
+        </div>
+        <h2>Sample Data</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th> Name </th>
+                    <th> Park </th>
+                    <th> Manufacturer </th>
+                    <th> Year Opened </th>
+                    <th> Height (ft) </th>
+                    <th> Max Speed (mph) </th>
+                    <th> In Operation </th>
+                    <th> Edit Coaster? </th>
+                    <th> Delete Coaster? </th>
+                    <th> View / Edit Features?</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Maverick</td>
+                    <td>Cedar Point</td>
+                    <td>Intamin AG</td>
+                    <td>2007</td>
+                    <td>105</td>
+                    <td>70</td>
+                    <td>Yes</td>
+                    <td>
+                        <form action="" method="get">
+                            <input type="hidden" name="id" value="1">
+                            <input class = "inlineButton" type="Submit" value="Edit">
+                        </form>
+                    </td>
+                    <td>
+                        <form action="" method="get">
+                            <input type="hidden" name="id" value="1">
+                            <input class="inlineButton" type="Submit" value="Delete">
+                        </form>
+                    </td>
+                    <td>
+                        <form action="" method="get">
+                            <input type="hidden" name="id" value="1">
+                            <input class = "inlineButton" type="Submit" value="Features">
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Millenium Forcer</td>
+                    <td>Cedar Point</td>
+                    <td>Intamin AG</td>
+                    <td>2000</td>
+                    <td>310</td>
+                    <td>93</td>
+                    <td>Yes</td>
+                    <td>
+                        <form action="" method="get">
+                            <input type="hidden" name="id" value="1">
+                            <input class = "inlineButton" type="Submit" value="Edit">
+                        </form>
+                    </td>
+                    <td>
+                        <form action="" method="get">
+                            <input type="hidden" name="id" value="1">
+                            <input class="inlineButton" type="Submit" value="Delete">
+                        </form>
+                    </td>
+                    <td>
+                        <form action="" method="get">
+                            <input type="hidden" name="id" value="1">
+                            <input class = "inlineButton" type="Submit" value="Features">
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Disaster Transport</td>
+                    <td>Cedar Point</td>
+                    <td>Intamin AG</td>
+                    <td>1985</td>
+                    <td>63</td>
+                    <td>40</td>
+                    <td>No</td>
+                    <td>
+                        <form action="" method="get">
+                            <input type="hidden" name="id" value="1">
+                            <input class = "inlineButton" type="Submit" value="Edit">
+                        </form>
+                    </td>
+                    <td>
+                        <form action="" method="get">
+                            <input type="hidden" name="id" value="1">
+                            <input class="inlineButton" type="Submit" value="Delete">
+                        </form>
+                    </td>
+                    <td>
+                        <form action="" method="get">
+                            <input type="hidden" name="id" value="1">
+                            <input class = "inlineButton" type="Submit" value="Features">
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+            
+        <form action="" method="get">
+            <fieldset>
+                <legend>Search for Coaster by Name: </legend>
+                <label> Name <input type="text" name="name" id="name">	</label>
+                <input type="submit" value="Search" id="search"/>
+                <div id="badinput"></div>
+            </fieldset>
+        </form>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <form action="" method="get">
+            <fieldset>
+                <legend>Add a New Coaster</legend>
+                <label> Name <input type="text" name="name" id="name">	</label>
+                <br>
+                <label> Park 
+                    <select name="park">
+                        <option value="1">Cedar Point</option>
+                        <option value="2">Kings Island</option>
+                        <option value="3">Canada's Wonderland</option>
+                        <option value="4">Six Flags Over Texas</option>
+                        <option value="5">Six Flags Fiesta Texas</option>
+                        <option value="6">Holiday World</option>
+                    </select>
+                </label>
+                <br>
+                <label> Manufacturer 
+                    <select name="manufacturer">
+                        <option value="1">Intamin AG</option>
+                        <option value="2">Arrow Dynamics</option>
+                        <option value="3">Rocky Mountain Construction</option>
+                        <option value="4">Bolliger &amp; Mabillard</option>
+                        <option value="5">Custom Coasters International</option>
+                    </select>
+                </label>
+                <br>
+                <label> Year Opened <input type="text" name="yearOpened" id="yearOpened">	</label>
+                <br>
+                <label> Height (ft) <input type="text" name="height" id="height">	</label>
+                <br>
+                <label> Max Speed (mph) <input type="text" name="maxSpeed" id="maxSpeed">	</label>
+                <br>
+                <label> In Operation
+                    <select name="inOperation">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                </label>
+                <br>
+                <div id="badinput"></div>
+                <input type="submit" value="Add Coaster" id="addsubmit"/>
+            </fieldset>
+        </form>
+        <br><br>
+        <p id="imageCitation">* All images retrieved from pixabay.com, where images are free for use and do not require attribution.</p>
+        </div>
+        <span class="sr-only">End of page content.</span>
+        
+        <!-- Scripts required for use of various Bootstrap CDN features -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    </body>
+</html>
