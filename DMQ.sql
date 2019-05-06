@@ -19,7 +19,9 @@ SET name = @name, park = @park, manufacturer = @manufacturer, year_opened = @yea
 max_speed = @max_speed, in_operation = @in_operation
 WHERE id = @id;
 
-
+-- Delete a coaster using its id
+DELETE FROM rcdb_coaster
+WHERE id = @id
 
 
 -- Select all features in the database
