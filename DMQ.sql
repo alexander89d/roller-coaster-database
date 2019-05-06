@@ -1,5 +1,5 @@
 -- Select all roller coasters in the database
-SELECT * from rcdb_coaster;
+SELECT * FROM rcdb_coaster;
 
 -- Insert a new roller coaster with all fields
 INSERT INTO rcdb_coaster (name, park, manufacturer, year_opened, height, max_speed, in_operation)
@@ -11,7 +11,7 @@ VALUES (@name, @manufacturer, @year_opened, @height, @max_speed, @in_operation);
 
 -- Search by roller coaster name
 SELECT * FROM rcdb_coaster
-WHERE name = '@name';
+WHERE name = @name;
 
 -- Update a roller coaster
 UPDATE rcdb_coaster
@@ -23,7 +23,7 @@ WHERE id = @id;
 
 
 -- Select all features in the database
-SELECT * from rcdb_features;
+SELECT * FROM rcdb_features;
 
 -- Insert a new feature
 INSERT INTO rcdb_features (name)
@@ -33,7 +33,7 @@ VALUES (@name);
 
 
 -- Select all manufacturers in the database
-SELECT * from rcdb_manufacturer;
+SELECT * FROM rcdb_manufacturer;
 
 -- Get the names and id's of all manufacturers in the database
 SELECT name, id FROM rcdb_manufacturer;
@@ -47,7 +47,7 @@ VALUES (@name, @city, @state_province, @country);
 
 
 -- Select all parks in the database
-SELECT * from rcdb_park;
+SELECT * FROM rcdb_park;
 
 -- Get the names and id's of all parks in the database
 SELECT name, id from rcdb_park;
@@ -65,7 +65,7 @@ VALUES (@name, @city, @state_province, @country, @owner);
 
 
 -- Select all owners in the database
-SELECT * from rcdb_park_owner;
+SELECT * FROM rcdb_park_owner;
 
 -- Get the names and id's of all of the owners in the database
 SELECT name, id from rcdb_park_owner;
@@ -99,31 +99,10 @@ DELETE FROM rcdb_coaster_features
 WHERE 
 rcdb_coaster_features.cid = @cid AND rcdb_coaster_features.fid = @fid;
 
-
--- Test to see if a row exists in the rcdb_coaster_features table given
--- a coaster id of @cid, and a feature id of @fid; will return 1 if the row exists in the table
--- and 0 if it does not exist in the table
-SELECT COUNT(1)
-FROM rcdb_coaster_features
-WHERE rcdb_coaster_features.cid = @cid AND rcdb_coaster_features.fid = @fid;
-
-
 -- Insert a row into rcdb_coaster_features table if it does not already exist.
 -- Make sure that the row does not exist before using this statement
 INSERT INTO rcdb_coaster_features (cid, fid)
-Values (@11, @8);
-
-
-
-
-
-
-
-
-
-
-
-
+VALUES (@cid, @fid);
 
 
 
