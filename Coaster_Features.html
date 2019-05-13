@@ -20,13 +20,13 @@
                     <a href="Index.html">Home</a>
                 </div>
                 <div class="col">
-                    <a href="Roller_Coasters.html">Coasters</a>
+                    <a href="Roller_Coasters.html">All Coasters and their Basic Features</a>
                 </div>
                 <div class="col">
-                    <a href="Features.html">List of All Features</a>
+                    <a href="Features.html">List of All Special Features</a>
                 </div>
                 <div class="col">
-                    <a href="Coaster_Features.html" style="font-weight: bolder;">Features of Specific Coasters</a>
+                    <a href="Coaster_Features.html" style="font-weight: bolder;">All Coasters and their Special Features</a>
                 </div>
                 <div class="col">  
                     <a href="Parks.html">Parks</a>
@@ -121,16 +121,58 @@
                     </select>
                 </label>
                 <br>
-
-                <br>
-                <br>
-                <br>
                 <div id="badinput"></div>
                 <input type="submit" value="Search" id="search"/>
             </fieldset>
 
         </form>
 
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <form action="" method="get">
+
+            <fieldset>
+                <legend>Add a New Coaster-Feature Entry</legend>
+
+                <label> Coaster 
+                    <select name="coaster">
+                        <option value="1">Maverick</option>
+                        <option value="2">Millenium Force</option>
+                        <option value="3">Disaster Transport</option>
+                        <option value="4">Top Thrill Dragster</option>
+                        <option value="5">Magnum XL-200</option>
+                        <option value="6">Raptor</option>
+                        <option value="7">Gemini</option>
+                        <option value="8">Valravn</option>
+                        <option value="9">GateKeeper</option>
+                        <option value="10">Steel Vengeance</option>
+                        <option value="11">Wicked Twister</option>
+                    </select>
+                </label>
+                <br>
+                <label> Feature 
+                    <select name="feature">
+                        <option value="1">Launching</option>
+                        <option value="2">Looping</option>
+                        <option value="3">Indoor</option>
+                        <option value="4">Inverted</option>
+                        <option value="5">Racing</option>
+                        <option value="6">Dive</option>
+                        <option value="7">Wing Rider</option>
+                        <option value="8">Backwards</option>
+                        <option value="9">Wooden</option>
+                    </select>
+                </label>
+
+                <br>
+                <div id="badinput"></div>
+                <input type="submit" value="Add Feature" id="addsubmit"/>
+            </fieldset>
+
+        </form>
         <br>
         <br>
         <p id="imageCitation">* All images retrieved from pixabay.com, where images are free for use and do not require attribution.</p>
