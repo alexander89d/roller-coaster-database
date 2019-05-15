@@ -46,104 +46,22 @@
         </div>
         <h2>Page Instructions</h2>
         <p>This page displays basic information about all roller coasters (name, park, manufacturer, height, year opened, max speed, and whether or not it is still in operation). Search a roller coaster by name to view its basic information. Click "Edit Basic Information" next to a coaster to update its basic information. Click "Delete" next to a roller coaster to delete it from the database. Use the form at the bottom of this page to add a new roller coaster and its basic information to the database. Click the "Special Features" button next to a roller coaster to view or update its special features.</p>
-        <h2>Sample Data</h2>
-        <table>
+        <h2>Current Data</h2>
+        <p id="no_data_rcdb_coasters" class="no_data">There is no data to display in the rcdb_coasters table.</p>
+        <table id="coaster_table" class="data_table">
             <thead>
-                <tr>
-                    <th> Name </th>
-                    <th> Park </th>
-                    <th> Manufacturer </th>
-                    <th> Year Opened </th>
-                    <th> Height (ft) </th>
-                    <th> Max Speed (mph) </th>
-                    <th> In Operation </th>
-                    <th> Edit Coaster Basic Features? </th>
-                    <th> Delete Coaster? </th>
-                    <th> View / Edit Special Features?</th>
-                </tr>
+                <th>Name</th>
+                <th>Park</th>
+                <th>Manufacturer</th>
+                <th>Year Opened</th>
+                <th>Height (ft)</th>
+                <th>Max Speed (mph)</th>
+                <th>In Operation</th>
+                <th>Edit Basic Coaster Features?</th>
+                <th>Delete Coaster?</th>
+                <th>View / Edit Special Features?</th>
             </thead>
-            <tbody>
-                <tr>
-                    <td>Maverick</td>
-                    <td>Cedar Point</td>
-                    <td>Intamin AG</td>
-                    <td>2007</td>
-                    <td>105</td>
-                    <td>70</td>
-                    <td>Yes</td>
-                    <td>
-                        <form action="" method="get">
-                            <input type="hidden" name="id" value="1">
-                            <input class = "inlineButton" type="Submit" value="Edit Basic Features">
-                        </form>
-                    </td>
-                    <td>
-                        <form action="" method="get">
-                            <input type="hidden" name="id" value="1">
-                            <input class="inlineButton" type="Submit" value="Delete">
-                        </form>
-                    </td>
-                    <td>
-                        <form action="" method="get">
-                            <input type="hidden" name="id" value="1">
-                            <input class = "inlineButton" type="Submit" value="Special Features">
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Millenium Forcer</td>
-                    <td>Cedar Point</td>
-                    <td>Intamin AG</td>
-                    <td>2000</td>
-                    <td>310</td>
-                    <td>93</td>
-                    <td>Yes</td>
-                    <td>
-                        <form action="" method="get">
-                            <input type="hidden" name="id" value="1">
-                            <input class = "inlineButton" type="Submit" value="Edit Basic Features">
-                        </form>
-                    </td>
-                    <td>
-                        <form action="" method="get">
-                            <input type="hidden" name="id" value="1">
-                            <input class="inlineButton" type="Submit" value="Delete">
-                        </form>
-                    </td>
-                    <td>
-                        <form action="" method="get">
-                            <input type="hidden" name="id" value="1">
-                            <input class = "inlineButton" type="Submit" value="Special Features">
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Disaster Transport</td>
-                    <td>Cedar Point</td>
-                    <td>Intamin AG</td>
-                    <td>1985</td>
-                    <td>63</td>
-                    <td>40</td>
-                    <td>No</td>
-                    <td>
-                        <form action="" method="get">
-                            <input type="hidden" name="id" value="1">
-                            <input class = "inlineButton" type="Submit" value="Edit Basic Features">
-                        </form>
-                    </td>
-                    <td>
-                        <form action="" method="get">
-                            <input type="hidden" name="id" value="1">
-                            <input class="inlineButton" type="Submit" value="Delete">
-                        </form>
-                    </td>
-                    <td>
-                        <form action="" method="get">
-                            <input type="hidden" name="id" value="1">
-                            <input class = "inlineButton" type="Submit" value="Special Features">
-                        </form>
-                    </td>
-                </tr>
+            <tbody id="coaster_table_body">
             </tbody>
         </table>
         <br>
@@ -218,6 +136,9 @@
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        
+        <!-- My own client-side script -->
+        <script src="Roller_Coasters_Script.js"></script>
 
     </body>
 </html>

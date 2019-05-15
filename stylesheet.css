@@ -79,3 +79,12 @@ td {
     left: 10%;
     margin: auto;
 }
+
+.no_data {
+    color: red;
+    display: none;
+}
+
+.data_table {
+    display: none;
+}
