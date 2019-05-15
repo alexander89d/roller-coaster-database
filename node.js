@@ -1,3 +1,6 @@
+/* To start forever: ./node_modules/forever/bin/forever start node.js [port_number] */
+/* To stop forever: ./node_modules/forever/bin/forever stop node.js */
+
 /* set up express */
 var express = require('express');
 var app = express();
@@ -25,7 +28,7 @@ app.use(function (req, res, next) {
 
 /* Create route to send JSON string of all coaster table data to client making request. */
 app.get('/select-all-coasters', function displayData(req, res, next) {   
-    mysql.pool.query("SELECT * FROM rcdb_coaster", function(err, rows, fields) {
+    mysql.pool.query("SELECT c.id, c.name, p.name AS park, m.name AS manufacturer, c.year_opened, c.height, c.max_speed, c.in_operation FROM rcdb_coaster c INNER JOIN rcdb_park p ON c.park = p.id INNER JOIN rcdb_manufacturer m ON c.manufacturer = m.id ORDER BY c.name ASC", function(err, rows, fields) {
         if (err) {
            next(err);
            return;
