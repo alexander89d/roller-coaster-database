@@ -1,5 +1,6 @@
 -- Select all roller coasters in the database
-SELECT * FROM rcdb_coaster;
+SELECT c.id, c.name, p.name AS park, m.name AS manufacturer, c.year_opened, c.height, c.max_speed, c.in_operation
+FROM rcdb_coaster c INNER JOIN rcdb_park p ON c.park = p.id INNER JOIN rcdb_manufacturer m ON c.manufacturer = m.id ORDER BY c.name ASC
 
 -- Insert a new roller coaster with all fields
 INSERT INTO rcdb_coaster (name, park, manufacturer, year_opened, height, max_speed, in_operation)
@@ -10,8 +11,10 @@ INSERT INTO rcdb_coaster (name, manufacturer, year_opened, height, max_speed, in
 VALUES (@name, @manufacturer, @year_opened, @height, @max_speed, @in_operation);
 
 -- Search by roller coaster name
-SELECT * FROM rcdb_coaster
-WHERE name = @name;
+SELECT c.id, c.name, p.name AS park, m.name AS manufacturer, c.year_opened, c.height, c.max_speed, c.in_operation
+FROM rcdb_coaster c INNER JOIN rcdb_park p ON c.park = p.id INNER JOIN rcdb_manufacturer m ON c.manufacturer = m.id 
+WHERE name = @name
+ORDER BY c.name ASC;
 
 -- Update a roller coaster
 UPDATE rcdb_coaster

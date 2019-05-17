@@ -54,9 +54,6 @@ h1 {
 
 table {
     position: relative;
-    border-style: solid;
-    border-color: black;
-    border-width: 1px;
     margin-bottom: 1em;
 }
 

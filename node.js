@@ -41,6 +41,21 @@ app.get('/select-all-coasters', function displayData(req, res, next) {
     });
 });
 
+/* Create route to send JSON string of coaster search results data to client making request. */
+app.get('/search-coasters', function displayData(req, res, next) {   
+    mysql.pool.query("SELECT c.id, c.name, p.name AS park, m.name AS manufacturer, c.year_opened, c.height, c.max_speed, c.in_operation FROM rcdb_coaster c INNER JOIN rcdb_park p ON c.park = p.id INNER JOIN rcdb_manufacturer m ON c.manufacturer = m.id WHERE c.name = ? ORDER BY c.name ASC", [req.query.name], function(err, rows, fields) {
+        if (err) {
+           next(err);
+           return;
+        }
+        var results = JSON.stringify(rows);
+        
+        /* Send JSON data back to the client that requested it. */
+        res.type("application/json");
+        res.send(results);
+    });
+});
+
 /* Create route to send JSON string of all feature table data to client making request. */
 app.get('/select-all-features', function displayData(req, res, next) {   
     mysql.pool.query("SELECT * FROM rcdb_features", function(err, rows, fields) {

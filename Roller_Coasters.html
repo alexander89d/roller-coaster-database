@@ -46,8 +46,10 @@
         </div>
         <h2>Page Instructions</h2>
         <p>This page displays basic information about all roller coasters (name, park, manufacturer, height, year opened, max speed, and whether or not it is still in operation). Search a roller coaster by name to view its basic information. Click "Edit Basic Information" next to a coaster to update its basic information. Click "Delete" next to a roller coaster to delete it from the database. Use the form at the bottom of this page to add a new roller coaster and its basic information to the database. Click the "Special Features" button next to a roller coaster to view or update its special features.</p>
-        <h2>Current Data</h2>
+        <h2 id="current_data">Current Data</h2>
+        <h2 id="search_results" style="display:none;">Search Results</h2>
         <p id="no_data_rcdb_coasters" class="no_data">There is no data to display in the rcdb_coasters table.</p>
+        <p id="no_search_results" class="no_data">No results from the rcdb_coasters table matched the search criteria.</p>
         <table id="coaster_table" class="data_table">
             <thead>
                 <th>Name</th>
@@ -74,9 +76,9 @@
         <form action="" method="get">
             <fieldset>
                 <legend>Search for Coaster by Name: </legend>
-                <label> Name <input type="text" name="name" id="name">	</label>
+                <label> Name <input type="text" name="name" id="name_to_search">	</label>
                 <input type="submit" value="Search" id="search"/>
-                <div id="badinput"></div>
+                <input type="submit" value="Clear Search Results" id="clear_search">
             </fieldset>
         </form>
         <br>
