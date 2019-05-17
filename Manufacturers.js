@@ -2,10 +2,66 @@
 const FLIP = 'http://flip3.engr.oregonstate.edu:';
 
 /* Constant for port number - can be changed to test on a different port */
-const PORT = '9895';
+const PORT = '9896';
 
 // function to load the table when the page has loaded
 document.addEventListener("DOMContentLoaded", loadTable() );
+
+// function to add functionality to the "Add Manufacturer" button
+document.getElementById('addsubmit').addEventListener('click', function(event) {
+	
+	document.getElementById('badinput').innerHTML = '';
+	addEntry(event);
+});
+
+// function to check validity of user input and then add the new // manufacturer to the database
+function addEntry(event) {
+	
+	let name = document.getElementById('name').value;
+	let city = document.getElementById('city').value;
+	let state = document.getElementById('state').value;
+	let country = document.getElementById('country').value;
+
+	if(name == ""){
+		document.getElementById('badinput').innerHTML="Name is required. New Manufacturer not added.";
+		event.preventDefault();
+		return;
+	}
+	else if(city == ""){
+		document.getElementById('badinput').innerHTML="City is required. New Manufacturer not added.";
+		event.preventDefault();
+		return;
+	}
+	else if(state == ""){
+		document.getElementById('badinput').innerHTML="State is required. New Manufacturer not added.";
+		event.preventDefault();
+		return;
+	}
+	else if(country == ""){
+		document.getElementById('badinput').innerHTML="Country is required. New Manufacturer not added.";
+		event.preventDefault();
+		return;
+	}
+	
+	let tail = '?' + 'name=' + name + '&city=' + city + '&state=' + state + '&country=' + country;
+
+	var req = new XMLHttpRequest();
+	req.open('GET', FLIP + PORT + '/add-manufacturer' + tail, true);
+	req.addEventListener('load',function(){
+	if(req.status >= 200 && req.status < 400){
+
+		loadTable();			
+	
+		event.preventDefault();
+		return;	
+
+      } else {
+        console.log("Error in network request: " + req.statusText);
+      }});
+    req.send();
+    event.preventDefault();
+}
+
 
 
 // function to fill in the table for manufacturers with data from the manufacturer table in 
@@ -17,8 +73,15 @@ function loadTable() {
 	req.addEventListener('load',function(){
 	    if(req.status >= 200 && req.status < 400){
 
+		let table = document.getElementById('tablebody');
+		while(table.firstChild)
+		{
+			table.removeChild(table.firstChild);
+		}
+
+
 		var response = JSON.parse(req.responseText);
-		let table = JSON.parse(response.results);		
+		table = JSON.parse(response.results);		
 
 		if(table.length === 0)
 		{

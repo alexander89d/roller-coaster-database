@@ -127,6 +127,38 @@ app.get('/delete-park',function(req,res, next){
   });
 });
 
+app.get('/add-owner',function(req,res,next){
+  var context = {};
+ 
+  var params = [req.query.name, req.query.city, req.query.state, req.query.country];
+
+  mysql.pool.query("INSERT INTO rcdb_park_owner (name, city, state_province, country) VALUES (?, ?, ?, ?)", params, function(err, result){
+    if(err){
+      next(err);
+      return;
+    }
+    context.entryAdded = JSON.stringify(result.affectedRows);
+    res.send(context);
+  });
+});
+
+app.get('/add-manufacturer',function(req,res,next){
+  var context = {};
+ 
+  var params = [req.query.name, req.query.city, req.query.state, req.query.country];
+
+  mysql.pool.query("INSERT INTO rcdb_manufacturer (name, city, state_province, country) VALUES (?, ?, ?, ?)", params, function(err, result){
+    if(err){
+      next(err);
+      return;
+    }
+    context.entryAdded = JSON.stringify(result.affectedRows);
+    res.send(context);
+  });
+});
+
+
+
 
 /* Listen on port and display message to indicate listening */
 app.listen(app.get('port'), function(){
