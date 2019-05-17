@@ -158,6 +158,37 @@ app.get('/add-manufacturer',function(req,res,next){
 });
 
 
+/* Create route to send JSON string of all owner names and their id's */
+app.post('/select-owner-names-ids',function(req, res, next){
+    var context = {};
+    mysql.pool.query('SELECT name, id FROM rcdb_park_owner ORDER BY name ASC', function(err, rows, fields){
+      if(err){
+        next(err);
+        return;
+      }
+
+      context.results = JSON.stringify(rows);
+      res.send(context);
+   });
+});
+
+
+// function route to add a new park to the database
+app.get('/add-park',function(req,res,next){
+  var context = {};
+ 
+  var params = [req.query.name, req.query.city, req.query.state, req.query.country, req.query.owner];
+
+  mysql.pool.query("INSERT INTO rcdb_park (name, city, state_province, country, owner) VALUES (?, ?, ?, ?, ?)", params, function(err, result){
+    if(err){
+      next(err);
+      return;
+    }
+    context.entryAdded = JSON.stringify(result.affectedRows);
+    res.send(context);
+  });
+});
+
 
 
 /* Listen on port and display message to indicate listening */

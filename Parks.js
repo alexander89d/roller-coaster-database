@@ -2,14 +2,114 @@
 const FLIP = 'http://flip3.engr.oregonstate.edu:';
 
 /* Constant for port number - can be changed to test on a different port */
-const PORT = '9895';
+const PORT = '9896';
 
 // function to load the table when the page has loaded
-document.addEventListener("DOMContentLoaded", loadTable() );
+document.addEventListener("DOMContentLoaded", pageSetup() );
+
+// function to add functionality to the "Add Park" button
+document.getElementById('addpark').addEventListener('click', function(event) {
+
+	document.getElementById('badinput').innerHTML = '';
+	addEntry(event);
+});
+
+
+// function to load the parks table and to also populate the
+// owner's selection dropdown in the new park submission form
+function pageSetup() {
+
+	loadTable();
+	addOwners();
+
+}
+
+// function to fill in the park owner options in the new park     // form
+function addOwners() {
+	
+	var req = new XMLHttpRequest();
+	req.open('POST', FLIP + PORT + '/select-owner-names-ids', true);
+	req.addEventListener('load',function(){
+	    if(req.status >= 200 && req.status < 400){
+	
+		var response = JSON.parse(req.responseText);
+		let table = JSON.parse(response.results);		
+
+		// for each row in the owner table, add the row to the  		// selection dropdown
+		let length = table.length;
+
+		for(var i = 0; i < length; i++)	{
+
+			let select = document.getElementById('ownerselect');
+
+			let option = document.createElement('option');
+
+			option.innerHTML = table[i].name;
+			option.value = table[i].id;
+
+			select.appendChild(option);
+	
+		}
+
+      }    else {
+        	console.log("Error in network request: " + req.statusText);
+      }});
+    req.send();
+};
+
+
+// function to check validity of user input and then add the new // park to the database
+function addEntry(event) {
+	
+	let name = document.getElementById('name').value;
+	let city = document.getElementById('city').value;
+	let state = document.getElementById('state').value;
+	let country = document.getElementById('country').value;
+	let owner = document.getElementById('ownerselect').value;
+
+	if(name == ""){
+		document.getElementById('badinput').innerHTML="Name is required. New Park not added.";
+		event.preventDefault();
+		return;
+	}
+	else if(city == ""){
+		document.getElementById('badinput').innerHTML="City is required. New Park not added.";
+		event.preventDefault();
+		return;
+	}
+	else if(state == ""){
+		document.getElementById('badinput').innerHTML="State is required. New Park not added.";
+		event.preventDefault();
+		return;
+	}
+	else if(country == ""){
+		document.getElementById('badinput').innerHTML="Country is required. New Park not added.";
+		event.preventDefault();
+		return;
+	}
+	
+	let tail = '?' + 'name=' + name + '&city=' + city + '&state=' + state + '&country=' + country + '&owner=' + owner;
+
+	var req = new XMLHttpRequest();
+	req.open('GET', FLIP + PORT + '/add-park' + tail, true);
+	req.addEventListener('load',function(){
+	if(req.status >= 200 && req.status < 400){
+
+		loadTable();			
+	
+		event.preventDefault();
+		return;	
+
+      } else {
+        console.log("Error in network request: " + req.statusText);
+      }});
+    req.send();
+    event.preventDefault();
+}
+
 
 
 // delete function to remove park from the database
-// this is not implemented yet
 function deleteEntry(id, event) {
 
 	let tail = "?id=" + id;
@@ -34,8 +134,8 @@ function deleteEntry(id, event) {
 
 
 
-// function to fill in the table for parks with data from the parks table in 
-// database
+// function to fill in the table for parks with data from the  
+// parks table in database
 function loadTable() {
 	
 	var req = new XMLHttpRequest();
