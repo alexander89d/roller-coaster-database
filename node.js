@@ -58,7 +58,7 @@ app.get('/search-coasters', function displayData(req, res, next) {
 
 /* Create route to send JSON string of all feature table data to client making request. */
 app.get('/select-all-features', function displayData(req, res, next) {   
-    mysql.pool.query("SELECT * FROM rcdb_features", function(err, rows, fields) {
+    mysql.pool.query("SELECT * FROM rcdb_features ORDER BY name ASC", function(err, rows, fields) {
         if (err) {
            next(err);
            return;
@@ -103,9 +103,7 @@ app.post('/select-all-owners',function(req, res, next){
 /* Create route to send JSON string of all owners table data to client making request. */
 app.post('/select-all-parks',function(req, res, next){
     var context = {};
-    mysql.pool.query('SELECT P.id, P.name, P.city, P.state_province, P.country, PO.name AS owner
-FROM rcdb_park P
-INNER JOIN rcdb_park_owner PO ON PO.id = P.owner ORDER BY P.name ASC', function(err, rows, fields){
+    mysql.pool.query('SELECT P.id, P.name, P.city, P.state_province, P.country, PO.name AS owner FROM rcdb_park P INNER JOIN rcdb_park_owner PO ON PO.id = P.owner ORDER BY P.name ASC', function(err, rows, fields){
       if(err){
         next(err);
         return;
