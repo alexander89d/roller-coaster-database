@@ -71,6 +71,53 @@ app.get('/select-all-features', function displayData(req, res, next) {
     });
 });
 
+/* Create route to send JSON string of all manufacturers table data to client making request. */
+app.post('/select-all-manufacturers',function(req, res, next){
+    var context = {};
+    mysql.pool.query('SELECT * FROM rcdb_manufacturer ORDER BY name ASC', function(err, rows, fields){
+      if(err){
+        next(err);
+        return;
+      }
+
+      context.results = JSON.stringify(rows);
+      res.send(context);
+   });
+});
+
+/* Create route to send JSON string of all owners table data to client making request. */
+app.post('/select-all-owners',function(req, res, next){
+    var context = {};
+    mysql.pool.query('SELECT * FROM rcdb_park_owner ORDER BY name ASC', function(err, rows, fields){
+      if(err){
+        next(err);
+        return;
+      }
+
+      context.results = JSON.stringify(rows);
+      res.send(context);
+   });
+});
+
+
+/* Create route to send JSON string of all owners table data to client making request. */
+app.post('/select-all-parks',function(req, res, next){
+    var context = {};
+    mysql.pool.query('SELECT P.id, P.name, P.city, P.state_province, P.country, PO.name AS owner
+FROM rcdb_park P
+INNER JOIN rcdb_park_owner PO ON PO.id = P.owner ORDER BY P.name ASC', function(err, rows, fields){
+      if(err){
+        next(err);
+        return;
+      }
+
+      context.results = JSON.stringify(rows);
+      res.send(context);
+   });
+});
+
+
+
 /* Listen on port and display message to indicate listening */
 app.listen(app.get('port'), function(){
     console.log('Express started at http://flip3.engr.oregonstate.edu:' + app.get('port') + '; press ctrl-C to terminate.');
