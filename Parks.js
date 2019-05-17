@@ -19,8 +19,9 @@ function deleteEntry(id, event) {
 		req.addEventListener('load',function(){
 		if(req.status >= 200 && req.status < 400){
 
+			
 			loadTable();	
-		
+			
 			event.preventDefault();
 			return;	
 
@@ -42,8 +43,15 @@ function loadTable() {
 	req.addEventListener('load',function(){
 	    if(req.status >= 200 && req.status < 400){
 
+		// remove all of the elements currently displayed by 			// the table
+		let table = document.getElementById('tablebody');
+		while(table.firstChild)
+		{
+			table.removeChild(table.firstChild);
+		}
+
 		var response = JSON.parse(req.responseText);
-		let table = JSON.parse(response.results);		
+		table = JSON.parse(response.results);		
 
 		if(table.length === 0)
 		{

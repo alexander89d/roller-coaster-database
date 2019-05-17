@@ -115,6 +115,18 @@ app.post('/select-all-parks',function(req, res, next){
 });
 
 
+app.get('/delete-park',function(req,res, next){
+  context = {};
+  let submittedId = [req.query.id];
+  mysql.pool.query('DELETE FROM rcdb_park WHERE id=?', submittedId , function(err, rows, fields){
+    if(err){
+      next(err);
+      return;
+    }
+    res.send(context);
+  });
+});
+
 
 /* Listen on port and display message to indicate listening */
 app.listen(app.get('port'), function(){
