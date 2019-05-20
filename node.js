@@ -28,7 +28,7 @@ app.use(function (req, res, next) {
 
 /* Create route to send JSON string of all coaster table data to client making request. */
 app.get('/select-all-coasters', function displayData(req, res, next) {   
-    mysql.pool.query("SELECT c.id, c.name, p.name AS park, m.name AS manufacturer, c.year_opened, c.height, c.max_speed, c.in_operation FROM rcdb_coaster c INNER JOIN rcdb_park p ON c.park = p.id INNER JOIN rcdb_manufacturer m ON c.manufacturer = m.id ORDER BY c.name ASC", function(err, rows, fields) {
+    mysql.pool.query("SELECT c.id, c.name, p.name AS park, m.name AS manufacturer, c.year_opened, c.height, c.max_speed, c.in_operation FROM rcdb_coaster c LEFT JOIN rcdb_park p ON c.park = p.id LEFT JOIN rcdb_manufacturer m ON c.manufacturer = m.id ORDER BY c.name ASC", function(err, rows, fields) {
         if (err) {
            next(err);
            return;
@@ -43,7 +43,7 @@ app.get('/select-all-coasters', function displayData(req, res, next) {
 
 /* Create route to send JSON string of coaster search results data to client making request. */
 app.get('/search-coasters', function displayData(req, res, next) {   
-    mysql.pool.query("SELECT c.id, c.name, p.name AS park, m.name AS manufacturer, c.year_opened, c.height, c.max_speed, c.in_operation FROM rcdb_coaster c INNER JOIN rcdb_park p ON c.park = p.id INNER JOIN rcdb_manufacturer m ON c.manufacturer = m.id WHERE c.name = ? ORDER BY c.name ASC", [req.query.name], function(err, rows, fields) {
+    mysql.pool.query("SELECT c.id, c.name, p.name AS park, m.name AS manufacturer, c.year_opened, c.height, c.max_speed, c.in_operation FROM rcdb_coaster c LEFT JOIN rcdb_park p ON c.park = p.id LEFT JOIN rcdb_manufacturer m ON c.manufacturer = m.id WHERE c.name = ? ORDER BY c.name ASC", [req.query.name], function(err, rows, fields) {
         if (err) {
            next(err);
            return;
@@ -59,6 +59,36 @@ app.get('/search-coasters', function displayData(req, res, next) {
 /* Create route to send JSON string of all feature table data to client making request. */
 app.get('/select-all-features', function displayData(req, res, next) {   
     mysql.pool.query("SELECT * FROM rcdb_features ORDER BY name ASC", function(err, rows, fields) {
+        if (err) {
+           next(err);
+           return;
+        }
+        var results = JSON.stringify(rows);
+        
+        /* Send JSON data back to the client that requested it. */
+        res.type("application/json");
+        res.send(results);
+    });
+});
+
+/* Create route to send JSON string of all park table data to client making get request. */
+app.get('/select-all-parks', function displayData(req, res, next) {   
+    mysql.pool.query("SELECT P.id, P.name, P.city, P.state_province, P.country, PO.name AS owner FROM rcdb_park P INNER JOIN rcdb_park_owner PO ON PO.id = P.owner ORDER BY P.name ASC", function(err, rows, fields) {
+        if (err) {
+           next(err);
+           return;
+        }
+        var results = JSON.stringify(rows);
+        
+        /* Send JSON data back to the client that requested it. */
+        res.type("application/json");
+        res.send(results);
+    });
+});
+
+/* Create route to send JSON string of all park table data to client making get request. */
+app.get('/select-all-manufacturers', function displayData(req, res, next) {   
+    mysql.pool.query("SELECT * FROM rcdb_manufacturer ORDER BY name ASC", function(err, rows, fields) {
         if (err) {
            next(err);
            return;
@@ -114,7 +144,6 @@ app.post('/select-all-parks',function(req, res, next){
    });
 });
 
-
 app.get('/delete-park',function(req,res, next){
   context = {};
   let submittedId = [req.query.id];
@@ -125,6 +154,39 @@ app.get('/delete-park',function(req,res, next){
     }
     res.send(context);
   });
+});
+
+/* Create route to add new coaster with a park to the databse */
+app.post('/add-coaster-with-park', function addFeature(req, res, next) {
+    mysql.pool.query("INSERT INTO rcdb_coaster (name, park, manufacturer, year_opened, height, max_speed, in_operation) VALUES (?, ?, ?, ?, ?, ?, ?)", [req.body.nameIn, req.body.parkIn, req.body.manufacturerIn, req.body.yearOpenedIn, req.body.heightIn, req.body.maxSpeedIn, req.body.inOperationIn], function(err, result) {
+        if (err) {
+            next(err);
+            return;
+        }
+        res.end();
+    });
+});
+
+/* Create route to add new coaster without a park to the databse */
+app.post('/add-coaster-no-park', function addCoasterNoPark(req, res, next) {
+    mysql.pool.query("INSERT INTO rcdb_coaster (name, manufacturer, year_opened, height, max_speed, in_operation) VALUES (?, ?, ?, ?, ?, ?)", [req.body.nameIn, req.body.manufacturerIn, req.body.yearOpenedIn, req.body.heightIn, req.body.maxSpeedIn, req.body.inOperationIn], function(err, result) {
+        if (err) {
+            next(err);
+            return;
+        }
+        res.end();
+    });
+});
+
+/* Create route to add new feature to the database */
+app.post('/add-feature', function addFeature(req, res, next) {
+    mysql.pool.query("INSERT INTO rcdb_features (name) VALUES (?)", [req.body.nameIn], function(err, result) {
+        if (err) {
+            next(err);
+            return;
+        }
+        res.end();
+    });
 });
 
 app.get('/add-owner',function(req,res,next){

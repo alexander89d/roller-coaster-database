@@ -89,37 +89,31 @@
         <form action="" method="get">
             <fieldset>
                 <legend>Add a New Coaster</legend>
-                <label> Name <input type="text" name="name" id="name">	</label>
+                <label> Name <input type="text" name="name" id="nameIn">	</label>
+                <p id="noNameIn" class="formError">A name for the coaster is required.</p>
                 <br>
                 <label> Park 
-                    <select name="park">
-                        <option value="1">Cedar Point</option>
-                        <option value="2">Kings Island</option>
-                        <option value="3">Canada's Wonderland</option>
-                        <option value="4">Six Flags Over Texas</option>
-                        <option value="5">Six Flags Fiesta Texas</option>
-                        <option value="6">Holiday World</option>
+                    <select name="park" id="parkIn">
+                        <option value="0">(not applicable)</option>
                     </select>
                 </label>
                 <br>
                 <label> Manufacturer 
-                    <select name="manufacturer">
-                        <option value="1">Intamin AG</option>
-                        <option value="2">Arrow Dynamics</option>
-                        <option value="3">Rocky Mountain Construction</option>
-                        <option value="4">Bolliger &amp; Mabillard</option>
-                        <option value="5">Custom Coasters International</option>
+                    <select name="manufacturer" id="manufacturerIn">
                     </select>
                 </label>
                 <br>
-                <label> Year Opened <input type="text" name="yearOpened" id="yearOpened">	</label>
+                <label> Year Opened <input type="number" name="yearOpened" id="yearOpenedIn">	</label>
+                <p id="noYearIn" class="formError">The year in which the coaster opened is required.</p>
                 <br>
-                <label> Height (ft) <input type="text" name="height" id="height">	</label>
+                <label> Height (ft) <input type="number" name="height" id="heightIn">	</label>
+                <p id="invalidHeight" class="formError">A height between 10 and 999 ft is required.</p>
                 <br>
-                <label> Max Speed (mph) <input type="text" name="maxSpeed" id="maxSpeed">	</label>
+                <label> Max Speed (mph) <input type="number" name="maxSpeed" id="maxSpeedIn">	</label>
+                <p id="invalidSpeed" class="formError">A max speed between 10 and 149 mph is required.</p>
                 <br>
                 <label> In Operation
-                    <select name="inOperation">
+                    <select name="inOperationIn" id="inOperationIn">
                         <option value="1">Yes</option>
                         <option value="0">No</option>
                     </select>

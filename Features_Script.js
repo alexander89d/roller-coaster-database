@@ -7,6 +7,16 @@ const PORT = '7994';
 /* Display table data once DOM content has loaded */
 document.addEventListener("DOMContentLoaded", displayFeaturesTable);
 
+/* Bind addsubmit button once DOM content has loaded */
+document.addEventListener("DOMContentLoaded", bindAddSubmit());
+
+function bindAddSubmit() {
+    document.getElementById("addsubmit").addEventListener("click", function(event) {
+        event.preventDefault();
+        addFeature();
+    });
+}
+
 /* Function to make an AJAX request to API to display data table. */
 function displayFeaturesTable () {
     /* Initialize Ajax Request */
@@ -45,4 +55,39 @@ function displayFeaturesTable () {
         }
     });
     req.send(null);
+}
+
+/* Function to make an AJAX request to API to add a feature. */
+function addFeature () {
+    var nameIn = document.getElementById("nameIn").value;
+    
+    /* If the name field is blank, display a message informing the user and do not submit form. */
+    if (nameIn === "") {
+        document.getElementById("noNameIn").style.display = "block";
+        return;
+    }
+    
+    document.getElementById("noNameIn").style.display = "none";
+    
+    /* Make AJAX request to server to add data. */
+    var req = new XMLHttpRequest();
+    req.open("POST", FLIP + PORT + "/add-feature");
+    req.setRequestHeader("Content-Type", "application/json");
+    
+    var reqBody = {
+        "nameIn":nameIn
+    };
+    
+    reqBody = JSON.stringify(reqBody);
+    
+    req.addEventListener("load", function showTableAfterAdd() {
+        /* If there was no error, display rows. */
+        if (req.status >= 200 && req.status < 400) {
+            displayFeaturesTable();
+        }
+        else {
+            alert("An error occurred getting data from the server.");
+        }
+    });
+    req.send(reqBody);
 }

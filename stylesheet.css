@@ -85,3 +85,8 @@ td {
 .data_table {
     display: none;
 }
+
+.formError {
+    display: none;
+    color: red;
+}
