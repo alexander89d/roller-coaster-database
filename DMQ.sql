@@ -38,7 +38,7 @@ VALUES (@name);
 
 
 -- Select all manufacturers in the database
-SELECT * FROM rcdb_manufacturer;
+SELECT * FROM rcdb_manufacturer ORDER BY name ASC;
 
 -- Get the names and id's of all manufacturers in the database
 SELECT name, id FROM rcdb_manufacturer;
@@ -52,14 +52,14 @@ VALUES (@name, @city, @state_province, @country);
 
 
 -- Select all parks in the database
-SELECT * FROM rcdb_park;
+SELECT P.id, P.name, P.city, P.state_province, P.country, PO.name AS owner FROM rcdb_park P INNER JOIN rcdb_park_owner PO ON PO.id = P.owner ORDER BY P.name ASC;
 
 -- Get the names and id's of all parks in the database
 SELECT name, id from rcdb_park;
 
 -- Delete a park using its id
 DELETE FROM rcdb_park
-WHERE id = @id
+WHERE id = @id;
 
 -- Insert a new park
 INSERT INTO rcdb_park (name, city, state_province, country, owner)
@@ -70,10 +70,10 @@ VALUES (@name, @city, @state_province, @country, @owner);
 
 
 -- Select all owners in the database
-SELECT * FROM rcdb_park_owner;
+SELECT * FROM rcdb_park_owner ORDER BY name ASC;
 
 -- Get the names and id's of all of the owners in the database
-SELECT name, id from rcdb_park_owner;
+SELECT name, id FROM rcdb_park_owner ORDER BY name ASC;
 
 -- Insert a new owner
 INSERT INTO rcdb_park_owner (name, city, state_province, country)
