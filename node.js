@@ -253,6 +253,71 @@ app.get('/add-park',function(req,res,next){
 
 
 
+// function route to get list of features not already associated 
+// with a coaster
+app.post('/select-unused-features',function(req,res,next){
+  var context = {};
+ 
+  mysql.pool.query("SELECT * FROM rcdb_features F WHERE F.id NOT IN ( SELECT CF.fid FROM rcdb_coaster_features CF WHERE CF.cid = ? )", req.query.id, function(err, rows, fields){
+    if(err){
+      next(err);
+      return;
+    }
+    context.results = JSON.stringify(rows);
+    res.send(context);
+  });
+});
+
+app.get('/delete-feature-coaster',function(req,res, next){
+  context = {};
+
+  var params = [req.query.fid, req.query.cid];
+  
+  mysql.pool.query('DELETE FROM rcdb_coaster_features WHERE fid=? AND cid=?', params , function(err, rows, fields){
+    if(err){
+      next(err);
+      return;
+    }
+    res.send(context);
+  });
+});
+
+
+
+// function route to get list of features associated with a 
+// coaster
+app.post('/select-features-for-coaster',function(req,res,next){
+  var context = {};
+ 
+  mysql.pool.query("SELECT F.name, F.id FROM rcdb_features F INNER JOIN rcdb_coaster_features CF ON CF.fid = F.id WHERE CF.cid = ?", req.query.id, function(err, rows, fields){
+    if(err){
+      next(err);
+      return;
+    }
+    context.results = JSON.stringify(rows);
+    res.send(context);
+  });
+});
+
+// function route to add a new coaster-feature relationship
+app.get('/add-coaster-feature-relationship',function(req,res,next){
+  var context = {};
+ 
+  var params = [req.query.cid, req.query.fid];
+
+  mysql.pool.query("INSERT INTO rcdb_coaster_features (cid, fid) VALUES (?, ?)", params, function(err, result){
+    if(err){
+      next(err);
+      return;
+    }
+    context.entryAdded = JSON.stringify(result.affectedRows);
+    res.send(context);
+  });
+});
+
+
+
+
 /* Listen on port and display message to indicate listening */
 app.listen(app.get('port'), function(){
     console.log('Express started at http://flip3.engr.oregonstate.edu:' + app.get('port') + '; press ctrl-C to terminate.');

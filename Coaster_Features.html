@@ -40,60 +40,32 @@
             </div>
         </div>
         <div id="mainContent">
-        <h1>All Coasters and their Special Features</h1>
+        <h1 id="coasterName"></h1>
         <div>
                 <img src="big-dipper-967140_1920.jpg" class="centered-image d-block w-25" alt="Image of a classic wooden coaster.">
         </div>
-        <h2>Sample Data</h2>
+
+        <h2>Basic Features</h2>
+	  <h6 id="coasterNameContent">Name: </h6>
+	  <h6 id="coasterParkContent">Park: </h6>
+	  <h6 id="coasterManufacturerContent">Manufacturer: </h6>
+	  <h6 id="coasterYearContent">Year Opened: </h6>
+	  <h6 id="coasterHeightContent">Height (ft): </h6>
+	  <h6 id="coasterSpeedContent">Max Speed (mph): </h6>
+	  <h6 id="coasterOperationContent">In Operation: </h6>
+
+
+	  <br>
+        <h2>Special Features</h2>
         <table>
             <thead>
                 <tr>
-                    <th> Name </th>
                     <th> Feature </th>
                     <th> Delete? </th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>Maverick</td>
-                    <td>Launching</td>
-                    <td>
-                        <form action="" method="get">
-                            <input type="hidden" name="id" value="1">
-                            <input type="Submit" value="Delete">
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Maverick</td>
-                    <td>Looping</td>
-                    <td>
-                        <form action="" method="get">
-                            <input type="hidden" name="id" value="1">
-                            <input type="Submit" value="Delete">
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Disaster Transport</td>
-                    <td>Indoor</td>
-                    <td>
-                        <form action="" method="get">
-                            <input type="hidden" name="id" value="1">
-                            <input type="Submit" value="Delete">
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Top Thrill Dragster</td>
-                    <td>Launching</td>
-                    <td>
-                        <form action="" method="get">
-                            <input type="hidden" name="id" value="1">
-                            <input type="Submit" value="Delete">
-                        </form>
-                    </td>
-                </tr>
+            <tbody id="tablebody">
+               
             </tbody>
         </table>
 
@@ -106,70 +78,18 @@
         <form action="" method="get">
 
             <fieldset>
-                <legend>Search for Roller Coasters based on a Feature</legend>
-                <label> Feature 
-                    <select name="feature">
-                        <option value="1">Launching</option>
-                        <option value="2">Looping</option>
-                        <option value="3">Indoor</option>
-                        <option value="4">Inverted</option>
-                        <option value="5">Racing</option>
-                        <option value="6">Dive</option>
-                        <option value="7">Wing Rider</option>
-                        <option value="8">Backwards</option>
-                        <option value="9">Wooden</option>
-                    </select>
-                </label>
-                <br>
-                <div id="badinput"></div>
-                <input type="submit" value="Search" id="search"/>
-            </fieldset>
+                <legend>Add a New Feature for the Current Coaster</legend>
 
-        </form>
-
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <form action="" method="get">
-
-            <fieldset>
-                <legend>Add a New Coaster-Feature Entry</legend>
-
-                <label> Coaster 
-                    <select name="coaster">
-                        <option value="1">Maverick</option>
-                        <option value="2">Millenium Force</option>
-                        <option value="3">Disaster Transport</option>
-                        <option value="4">Top Thrill Dragster</option>
-                        <option value="5">Magnum XL-200</option>
-                        <option value="6">Raptor</option>
-                        <option value="7">Gemini</option>
-                        <option value="8">Valravn</option>
-                        <option value="9">GateKeeper</option>
-                        <option value="10">Steel Vengeance</option>
-                        <option value="11">Wicked Twister</option>
-                    </select>
-                </label>
                 <br>
                 <label> Feature 
-                    <select name="feature">
-                        <option value="1">Launching</option>
-                        <option value="2">Looping</option>
-                        <option value="3">Indoor</option>
-                        <option value="4">Inverted</option>
-                        <option value="5">Racing</option>
-                        <option value="6">Dive</option>
-                        <option value="7">Wing Rider</option>
-                        <option value="8">Backwards</option>
-                        <option value="9">Wooden</option>
+                    <select name="feature" id="featureselect">
+                      
                     </select>
                 </label>
 
                 <br>
                 <div id="badinput"></div>
-                <input type="submit" value="Add Feature" id="addsubmit"/>
+                <input type="submit" value="Add Feature" id="addfeature"/>
             </fieldset>
 
         </form>
@@ -183,6 +103,6 @@
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
+	<script src="Coaster_Features.js"></script>
     </body>
 </html>
