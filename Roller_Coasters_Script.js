@@ -2,7 +2,7 @@
 const FLIP = 'http://flip3.engr.oregonstate.edu:';
 
 /* Constant for port number - can be changed to test on a different port */
-const PORT = '7994';
+const PORT = '17994';
 
 /* Display table data once DOM content has loaded */
 document.addEventListener("DOMContentLoaded", displayCoastersTable);
@@ -30,54 +30,55 @@ function displayCoastersTable () {
     document.getElementById("clear_search").style.display = "none";
     
     /* Initialize Ajax Request */
-    var req = new XMLHttpRequest();
+    let req = new XMLHttpRequest();
     req.open("GET", FLIP + PORT + "/select-all-coasters", true);
     
     req.addEventListener("load", function generateRows() {
         /* If there was no error, display rows. */
         if (req.status >= 200 && req.status < 400) {
-            var res = JSON.parse(req.responseText);
+            let res = JSON.parse(req.responseText);
             
             /* If there are no rows to display, inform the user */
             if (res.length == 0) {
-                var coasterTable = document.getElementById('coaster_table');
+                let coasterTable = document.getElementById('coaster_table');
                 coasterTable.style.display = 'none';
                 
-                var noDataMessage = document.getElementById('no_data_rcdb_coasters');
+                let noDataMessage = document.getElementById('no_data_rcdb_coasters');
                 noDataMessage.style.display = 'block';
                 
-                var noSearchResultsMessage = document.getElementById('no_search_results');
+                let noSearchResultsMessage = document.getElementById('no_search_results');
                 noSearchResultsMessage.style.display = 'none';
             }
             
             /* Otherwise, create a table with the coasters data. */
             else {
-                var coasterTable = document.getElementById('coaster_table');
+                let coasterTable = document.getElementById('coaster_table');
                 coasterTable.style.display = 'block';
                
-                var noDataMessage = document.getElementById('no_data_rcdb_coasters');
+                let noDataMessage = document.getElementById('no_data_rcdb_coasters');
                 noDataMessage.style.display = 'none';
                 
-                var noSearchResultsMessage = document.getElementById('no_search_results');
+                let noSearchResultsMessage = document.getElementById('no_search_results');
                 noSearchResultsMessage.style.display = 'none';
                 
                 /* Delete all current rows from HTML table (results of any search) before adding in all current rows in rcdb_coasters table. */
-                var tableBody = document.getElementById('coaster_table_body');
-                    var childrenArr = Array.from(tableBody.children);
-                    for (var child of childrenArr) {
+                let tableBody = document.getElementById('coaster_table_body');
+                    let childrenArr = Array.from(tableBody.children);
+                    for (let child of childrenArr) {
                         tableBody.removeChild(child);
                     }
                 
-                for (var row of res) {
-                    var newRow = document.createElement("tr");
+                for (let row of res) {
+                    let newRow = document.createElement("tr");
                     
                     newRow.id = row.id;
-            
-                    var nameCell = document.createElement("td");
+                    let id = row.id;
+                    
+                    let nameCell = document.createElement("td");
                     nameCell.textContent = row.name;
                     newRow.appendChild(nameCell);
             
-                    var parkCell = document.createElement("td");
+                    let parkCell = document.createElement("td");
                     if (row.park === null) {
                         parkCell.textContent = "(not applicable)";
                     }
@@ -86,23 +87,23 @@ function displayCoastersTable () {
                     }
                     newRow.appendChild(parkCell);
             
-                    var manufacturerCell = document.createElement("td");
+                    let manufacturerCell = document.createElement("td");
                     manufacturerCell.textContent = row.manufacturer;
                     newRow.appendChild(manufacturerCell);
                     
-                    var yearOpenedCell = document.createElement("td");
+                    let yearOpenedCell = document.createElement("td");
                     yearOpenedCell.textContent = row.year_opened;
                     newRow.appendChild(yearOpenedCell);
                     
-                    var heightCell = document.createElement("td");
+                    let heightCell = document.createElement("td");
                     heightCell.textContent = row.height;
                     newRow.appendChild(heightCell);
                     
-                    var maxSpeedCell = document.createElement("td");
+                    let maxSpeedCell = document.createElement("td");
                     maxSpeedCell.textContent = row.max_speed;
                     newRow.appendChild(maxSpeedCell);
                     
-                    var inOperationCell = document.createElement("td");
+                    let inOperationCell = document.createElement("td");
                     if (row.in_operation) {
                         inOperationCell.textContent = "Yes";
                     }
@@ -111,22 +112,42 @@ function displayCoastersTable () {
                     }
                     newRow.appendChild(inOperationCell);
                     
-                    var editCell = document.createElement("td");
-                    var editButton = document.createElement("button");
+                    let editCell = document.createElement("td");
+                    let editButton = document.createElement("button");
                     editButton.className = "inlineButton";
                     editButton.textContent = "Edit Basic Features";
                     editCell.appendChild(editButton);
                     newRow.appendChild(editCell);
                     
-                    var deleteCell = document.createElement("td");
-                    var deleteButton = document.createElement("button");
+                    let deleteCell = document.createElement("td");
+                    let deleteForm = document.createElement("form");
+                    deleteForm.addEventListener('click', function(event) {
+
+                        let current = id;
+                        /* TESTING ONLY */
+                        console.log("Calling deleteEntry on row id=" + id);
+                        deleteEntry(current, event);
+                        }
+                    );
+                    
+                    let idInput = document.createElement("input");
+                    idInput.type = "hidden";
+                    idInput.name = "id";
+                    idInput.value = newRow.id;
+                    deleteForm.appendChild(idInput);
+                    
+                    let deleteButton = document.createElement("input");
+                    deleteButton.type = "submit";
+                    deleteButton.name = "delete";
+                    deleteButton.value = "Delete";
                     deleteButton.className = "inlineButton";
-                    deleteButton.textContent = "Delete";
-                    deleteCell.appendChild(deleteButton);
+                    deleteForm.appendChild(deleteButton);
+                    
+                    deleteCell.appendChild(deleteForm);
                     newRow.appendChild(deleteCell);
                     
-                    var specialFeaturesCell = document.createElement("td");
-                    var specialFeaturesButton = document.createElement("button");
+                    let specialFeaturesCell = document.createElement("td");
+                    let specialFeaturesButton = document.createElement("button");
                     specialFeaturesButton.className = "inlineButton";
                     specialFeaturesButton.textContent = "Special Features";
                     specialFeaturesCell.appendChild(specialFeaturesButton);
@@ -151,57 +172,57 @@ function bindSearchButton () {
         document.getElementById("clear_search").style.display = "inline";
         
         /* Get search term */
-        var nameToSearch = document.getElementById("name_to_search").value;
+        let nameToSearch = document.getElementById("name_to_search").value;
         
         /* Initialize Ajax Request */
-        var req = new XMLHttpRequest();
+        let req = new XMLHttpRequest();
         req.open("GET", FLIP + PORT + "/search-coasters?name=" + nameToSearch, true);
 
         req.addEventListener("load", function generateRows() {
             /* If there was no error, display rows. */
             if (req.status >= 200 && req.status < 400) {
-                var res = JSON.parse(req.responseText);
+                let res = JSON.parse(req.responseText);
 
                 /* If there are no rows to display, inform the user */
                 if (res.length == 0) {
-                    var noDataMessage = document.getElementById('no_data_rcdb_coasters');
+                    let noDataMessage = document.getElementById('no_data_rcdb_coasters');
                     noDataMessage.style.display = 'none';
                     
-                    var noSearchResultsMessage = document.getElementById('no_search_results');
+                    let noSearchResultsMessage = document.getElementById('no_search_results');
                     noSearchResultsMessage.style.display = 'block';
                     
-                    var coasterTable = document.getElementById("coaster_table");
+                    let coasterTable = document.getElementById("coaster_table");
                     coasterTable.style.display = "none";
                 }
 
                 /* Otherwise, create a table with the coasters data. */
                 else {
-                    var noDataMessage = document.getElementById('no_data_rcdb_coasters');
+                    let noDataMessage = document.getElementById('no_data_rcdb_coasters');
                     noDataMessage.style.display = 'none';
                     
-                    var noSearchResultsMessage = document.getElementById('no_search_results');
+                    let noSearchResultsMessage = document.getElementById('no_search_results');
                     noSearchResultsMessage.style.display = 'none';
                     
-                    var coasterTable = document.getElementById("coaster_table");
+                    let coasterTable = document.getElementById("coaster_table");
                     coasterTable.style.display = "block";
                     
                     /* Delete all current rows from HTML table before adding just the row(s) corresponding to the search results. */
-                    var tableBody = document.getElementById('coaster_table_body');
-                    var childrenArr = Array.from(tableBody.children);
-                    for (var child of childrenArr) {
+                    let tableBody = document.getElementById('coaster_table_body');
+                    let childrenArr = Array.from(tableBody.children);
+                    for (let child of childrenArr) {
                         tableBody.removeChild(child);
                     }
                         
-                    for (var row of res) {
-                        var newRow = document.createElement("tr");
+                    for (let row of res) {
+                        let newRow = document.createElement("tr");
 
                         newRow.id = row.id;
 
-                        var nameCell = document.createElement("td");
+                        let nameCell = document.createElement("td");
                         nameCell.textContent = row.name;
                         newRow.appendChild(nameCell);
 
-                        var parkCell = document.createElement("td");
+                        let parkCell = document.createElement("td");
                         if (row.park === null) {
                             parkCell.textContent = "(not applicable)";
                         }
@@ -210,23 +231,23 @@ function bindSearchButton () {
                         }
                         newRow.appendChild(parkCell);
 
-                        var manufacturerCell = document.createElement("td");
+                        let manufacturerCell = document.createElement("td");
                         manufacturerCell.textContent = row.manufacturer;
                         newRow.appendChild(manufacturerCell);
 
-                        var yearOpenedCell = document.createElement("td");
+                        let yearOpenedCell = document.createElement("td");
                         yearOpenedCell.textContent = row.year_opened;
                         newRow.appendChild(yearOpenedCell);
 
-                        var heightCell = document.createElement("td");
+                        let heightCell = document.createElement("td");
                         heightCell.textContent = row.height;
                         newRow.appendChild(heightCell);
 
-                        var maxSpeedCell = document.createElement("td");
+                        let maxSpeedCell = document.createElement("td");
                         maxSpeedCell.textContent = row.max_speed;
                         newRow.appendChild(maxSpeedCell);
 
-                        var inOperationCell = document.createElement("td");
+                        let inOperationCell = document.createElement("td");
                         if (row.in_operation) {
                             inOperationCell.textContent = "Yes";
                         }
@@ -235,22 +256,22 @@ function bindSearchButton () {
                         }
                         newRow.appendChild(inOperationCell);
 
-                        var editCell = document.createElement("td");
-                        var editButton = document.createElement("button");
+                        let editCell = document.createElement("td");
+                        let editButton = document.createElement("button");
                         editButton.className = "inlineButton";
                         editButton.textContent = "Edit Basic Features";
                         editCell.appendChild(editButton);
                         newRow.appendChild(editCell);
 
-                        var deleteCell = document.createElement("td");
-                        var deleteButton = document.createElement("button");
+                        let deleteCell = document.createElement("td");
+                        let deleteButton = document.createElement("button");
                         deleteButton.className = "inlineButton";
                         deleteButton.textContent = "Delete";
                         deleteCell.appendChild(deleteButton);
                         newRow.appendChild(deleteCell);
 
-                        var specialFeaturesCell = document.createElement("td");
-                        var specialFeaturesButton = document.createElement("button");
+                        let specialFeaturesCell = document.createElement("td");
+                        let specialFeaturesButton = document.createElement("button");
                         specialFeaturesButton.className = "inlineButton";
                         specialFeaturesButton.textContent = "Special Features";
                         specialFeaturesCell.appendChild(specialFeaturesButton);
@@ -271,16 +292,16 @@ function bindSearchButton () {
 function generateFormDropdowns() {
     /* Generate dropdown options for park name. */
     /* Initialize Ajax Request */
-    var reqPark = new XMLHttpRequest();
+    let reqPark = new XMLHttpRequest();
     reqPark.open("GET", FLIP + PORT + "/select-all-parks", true);
     
     reqPark.addEventListener("load", function generateParkDropdown() {
         /* If there was no error, display rows. */
         if (reqPark.status >= 200 && reqPark.status < 400) {
-            var res = JSON.parse(reqPark.responseText);
+            let res = JSON.parse(reqPark.responseText);
             
-            for (var row of res) {
-                var parkOption = document.createElement("option");
+            for (let row of res) {
+                let parkOption = document.createElement("option");
                 parkOption.value = row.id;
                 parkOption.textContent = row.name;
                 document.getElementById("parkIn").appendChild(parkOption);
@@ -288,16 +309,16 @@ function generateFormDropdowns() {
             
              /* Generate dropdown options for manufacturer name. */
             /* Initialize Ajax Request */
-            var reqManufacturer= new XMLHttpRequest();
+            let reqManufacturer= new XMLHttpRequest();
             reqManufacturer.open("GET", FLIP + PORT + "/select-all-manufacturers", true);
 
             reqManufacturer.addEventListener("load", function generateParkDropdown() {
                 /* If there was no error, display rows. */
                 if (reqManufacturer.status >= 200 && reqManufacturer.status < 400) {
-                    var res = JSON.parse(reqManufacturer.responseText);
+                    let res = JSON.parse(reqManufacturer.responseText);
 
-                    for (var row of res) {
-                        var manufacturerOption = document.createElement("option");
+                    for (let row of res) {
+                        let manufacturerOption = document.createElement("option");
                         manufacturerOption.value = row.id;
                         manufacturerOption.textContent = row.name;
                         document.getElementById("manufacturerIn").appendChild(manufacturerOption);
@@ -332,45 +353,45 @@ function addCoaster () {
     document.getElementById("invalidSpeed").style.display = "none";
     
     /* Flag initialized to true and set to false if invalid data is provided in any field. */
-    var validInput = true;
+    let validInput = true;
     
     /* Flag intialized to true and set to false if no park name is provided. */
-    var hasAPark = true;
+    let hasAPark = true;
     
-    var nameIn = document.getElementById("nameIn").value;
+    let nameIn = document.getElementById("nameIn").value;
     if (nameIn === "") {
         document.getElementById("noNameIn").style.display = "block";
         validInput = false;
     }
     
-    var parkIn = document.getElementById("parkIn").value;
+    let parkIn = document.getElementById("parkIn").value;
     if (Number(parkIn) === 0) {
         hasAPark = false;
     }
     
-    var manufacturerIn = document.getElementById("manufacturerIn").value;
+    let manufacturerIn = document.getElementById("manufacturerIn").value;
     
-    var yearOpenedIn = document.getElementById("yearOpenedIn").value;
+    let yearOpenedIn = document.getElementById("yearOpenedIn").value;
     if (yearOpenedIn === "") {
         document.getElementById("noYearIn").style.display = "block";
         validInput = false;
     }
     
-    var heightIn = document.getElementById("heightIn").value;
-    var heightNum = Number(heightIn);
+    let heightIn = document.getElementById("heightIn").value;
+    let heightNum = Number(heightIn);
     if (heightIn === "" || heightNum < 10 || heightNum > 999) {
         document.getElementById("invalidHeight").style.display = "block";
         validInput = false;
     }
     
-    var maxSpeedIn = document.getElementById("maxSpeedIn").value;
-    var maxSpeedNum = Number(maxSpeedIn);
+    let maxSpeedIn = document.getElementById("maxSpeedIn").value;
+    let maxSpeedNum = Number(maxSpeedIn);
     if (maxSpeedIn === "" || maxSpeedNum < 10 || maxSpeedNum > 149) {
         document.getElementById("invalidSpeed").style.display = "block";
         validInput = false;
     }
     
-    var inOperationIn = document.getElementById("inOperationIn").value;
+    let inOperationIn = document.getElementById("inOperationIn").value;
     
     /* If the input is invalid in any way, return from the function now that the relevant messages have been posted. */
     if (!validInput) {
@@ -381,11 +402,11 @@ function addCoaster () {
     
     if (hasAPark) {
         /* Make AJAX request to server to add data. */
-        var req = new XMLHttpRequest();
+        let req = new XMLHttpRequest();
         req.open("POST", FLIP + PORT + "/add-coaster-with-park");
         req.setRequestHeader("Content-Type", "application/json");
 
-        var reqBody = {
+        let reqBody = {
             "nameIn":nameIn,
             "parkIn":parkIn,
             "manufacturerIn":manufacturerIn,
@@ -411,11 +432,11 @@ function addCoaster () {
     
     else {
         /* Make AJAX request to server to add data. */
-        var req = new XMLHttpRequest();
+        let req = new XMLHttpRequest();
         req.open("POST", FLIP + PORT + "/add-coaster-no-park");
         req.setRequestHeader("Content-Type", "application/json");
 
-        var reqBody = {
+        let reqBody = {
             "nameIn":nameIn,
             "manufacturerIn":manufacturerIn,
             "yearOpenedIn":yearOpenedIn,
@@ -437,4 +458,27 @@ function addCoaster () {
         });
         req.send(reqBody);
     }
+}
+
+// delete function to remove park from the database
+function deleteEntry(id, event) {
+
+	let tail = "?id=" + id;
+
+	let req = new XMLHttpRequest();
+		req.open('GET', FLIP + PORT + '/delete-coaster' + tail, true);
+		req.addEventListener('load',function(){
+		if(req.status >= 200 && req.status < 400){
+
+			
+			displayCoastersTable();	
+			
+			event.preventDefault();
+			return;	
+
+	      } else {
+        	console.log("Error in network request: " + req.statusText);
+	      }});
+	    req.send();
+	    event.preventDefault();
 }

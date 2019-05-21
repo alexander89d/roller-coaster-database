@@ -144,6 +144,19 @@ app.post('/select-all-parks',function(req, res, next){
    });
 });
 
+/* Create route to delete coaster. */
+app.get('/delete-coaster', function(req, res, next) {
+   mysql.pool.query("DELETE FROM rcdb_coaster WHERE id = ?", [req.query.id], function(err, result) {
+       if (err) {
+           next(err);
+           return;
+       }
+       result = JSON.stringify(result);
+            
+       res.end();
+   });
+});
+
 app.get('/delete-park',function(req,res, next){
   context = {};
   let submittedId = [req.query.id];
