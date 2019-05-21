@@ -14,6 +14,8 @@ document.addEventListener("DOMContentLoaded", bindClearSearchButton);
 
 document.addEventListener("DOMContentLoaded", bindAddSubmit);
 
+document.addEventListener("DOMContentLoaded", generateFormDropdowns)
+
 /* Function to bind addsubmit button */
 function bindAddSubmit() {
     document.getElementById("addsubmit").addEventListener("click", function(event) {
@@ -132,7 +134,6 @@ function displayCoastersTable () {
                     document.getElementById("coaster_table_body").appendChild(newRow);
                 }
             }
-            generateFormDropdowns();
         }
         else {
             alert("An error occurred getting data from the server.");
@@ -257,7 +258,6 @@ function bindSearchButton () {
                         document.getElementById("coaster_table_body").appendChild(newRow);
                     }
                 }
-                generateFormDropdowns();
             }
             else {
                 alert("An error occurred getting data from the server.");
@@ -320,7 +320,7 @@ function generateFormDropdowns() {
 function bindClearSearchButton() {
     document.getElementById("clear_search").addEventListener("click", function (event){
        event.preventDefault();
-        displayCoastersTable();
+       location.reload(true);
     });
 }
 

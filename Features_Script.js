@@ -38,6 +38,15 @@ function displayFeaturesTable () {
             else {
                 var featuresTable = document.getElementById('features_table');
                 featuresTable.style.display = 'block';
+                
+                var tableBody = document.getElementById('features_table_body')
+                /* Remove old table rows from HTML (useful if updating the table so that there aren't duplicate rows).*/
+                var childrenArr = Array.from(tableBody.children);
+                for (var child of childrenArr) {
+                    tableBody.removeChild(child);
+                }
+                
+                /* Display table data. */
                 for (var row of res) {
                     var newRow = document.createElement("tr");
                     
@@ -46,7 +55,7 @@ function displayFeaturesTable () {
                     var nameCell = document.createElement("td");
                     nameCell.textContent = row.name;
                     newRow.appendChild(nameCell);
-                    document.getElementById("features_table_body").appendChild(newRow);
+                    tableBody.appendChild(newRow);
                 }
             }
         }
