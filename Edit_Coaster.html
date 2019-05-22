@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Roller Coaster Database - Edit Coaster Information</title>
+        
+        <!-- Link to Bootstrap CDN stylesheet -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        
+        <!-- Link to my own stylesheet -->
+        <link rel="stylesheet" href="stylesheet.css" type="text/css">
+    </head>
+    <body>
+        <div id="pageHead">
+            <h1>Roller Coaster Database</h1>
+        </div>
+        <div id="navMenu" class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <a href="Index.html">Home</a>
+                </div>
+                <div class="col">
+                    <a href="Roller_Coasters.html">Coasters</a>
+                </div>
+                <div class="col">
+                    <a href="Features.html">List of All Special Features</a>
+                </div>
+                <div class="col">  
+                    <a href="Parks.html">Parks</a>
+                </div>
+                <div class="col">
+                    <a href="Owners.html">Park Owners</a>
+                </div>
+                <div class="col">
+                    <a href="Manufacturers.html">Manufacturers</a>
+                </div>
+            </div>
+        </div>
+        <div id="mainContent">
+            <form action="" method="post">
+                <fieldset>
+                    <legend>Edit Coaster Information</legend>
+                    <label> Name <input type="text" name="name" id="nameIn">	</label>
+                    <p id="noNameIn" class="formError">A name for the coaster is required.</p>
+                    <br>
+                    <label> Park 
+                        <select name="park" id="parkIn">
+                            <option value="0">(not applicable)</option>
+                        </select>
+                    </label>
+                    <br>
+                    <label> Manufacturer 
+                        <select name="manufacturer" id="manufacturerIn">
+                        </select>
+                    </label>
+                    <br>
+                    <label> Year Opened <input type="number" name="yearOpened" id="yearOpenedIn">	</label>
+                    <p id="noYearIn" class="formError">The year in which the coaster opened is required.</p>
+                    <br>
+                    <label> Height (ft) <input type="number" name="height" id="heightIn">	</label>
+                    <p id="invalidHeight" class="formError">A height between 10 and 999 ft is required.</p>
+                    <br>
+                    <label> Max Speed (mph) <input type="number" name="maxSpeed" id="maxSpeedIn">	</label>
+                    <p id="invalidSpeed" class="formError">A max speed between 10 and 149 mph is required.</p>
+                    <br>
+                    <label> In Operation
+                        <select name="inOperationIn" id="inOperationIn">
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
+                    </label>
+                    <br>
+                    <div id="badinput"></div>
+                    <input type="submit" value="Update" id="updatesubmit"/>
+                </fieldset>
+            </form>
+            <br><br>
+        </div>
+        <span class="sr-only">End of page content.</span>
+        
+        <!-- Scripts required for use of various Bootstrap CDN features -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        
+        <!-- My own client-side script -->
+        <script src="Edit_Coaster.js"></script>
+
+    </body>
+</html>

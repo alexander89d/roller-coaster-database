@@ -1,3 +1,5 @@
+/* URL for testing new features while peer reviewers are reviewing current version: http://web.engr.oregonstate.edu/~densmora/rcdb_testing/Index.html */
+
 /* To start forever: ./node_modules/forever/bin/forever start node.js [port_number] */
 /* To stop forever: ./node_modules/forever/bin/forever stop node.js */
 
@@ -53,6 +55,32 @@ app.get('/search-coasters', function displayData(req, res, next) {
         /* Send JSON data back to the client that requested it. */
         res.type("application/json");
         res.send(results);
+    });
+});
+
+/* Create route to send JSON string of coaster search results data to client making request based on coaster id. */
+app.get('/search-coasters-by-id', function displayData(req, res, next) {   
+    mysql.pool.query("SELECT * FROM rcdb_coaster WHERE id = ?", [req.query.id], function(err, rows, fields) {
+        if (err) {
+           next(err);
+           return;
+        }
+        var results = JSON.stringify(rows);
+        
+        /* Send JSON data back to the client that requested it. */
+        res.type("application/json");
+        res.send(results);
+    });
+});
+
+/* Create route to update coaster information. */
+app.post('/update-coaster', function(req, res, next) {
+    mysql.pool.query("UPDATE rcdb_coaster SET name = ?, park = ?, manufacturer = ?, year_opened = ?, height = ?, max_speed = ?, in_operation = ? WHERE id = ?", [req.body.nameIn, req.body.parkIn, req.body.manufacturerIn, req.body.yearOpenedIn, req.body.heightIn, req.body.maxSpeedIn, req.body.inOperationIn, req.body.idIn], function updateData(err, result) {
+        if (err) {
+            next(err);
+            return;
+        }
+        res.end();
     });
 });
 

@@ -16,6 +16,10 @@ FROM rcdb_coaster c LEFT JOIN rcdb_park p ON c.park = p.id LEFT JOIN rcdb_manufa
 WHERE name = @name
 ORDER BY c.name ASC;
 
+-- Search by roller coaster id (used for prefilling edit form data) --
+SELECT * FROM rcdb_coaster
+WHERE id = @id;
+
 -- Update a roller coaster
 UPDATE rcdb_coaster
 SET name = @name, park = @park, manufacturer = @manufacturer, year_opened = @year_opened, height = @height, 

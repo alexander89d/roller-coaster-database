@@ -113,10 +113,25 @@ function displayCoastersTable () {
                     newRow.appendChild(inOperationCell);
                     
                     let editCell = document.createElement("td");
-                    let editButton = document.createElement("button");
+                    let editForm = document.createElement("form");
+                    
+                    editForm.method = "get";
+                    editForm.action = "Edit_Coaster.html";
+                    
+                    let idInput = document.createElement("input");
+                    idInput.type = "hidden";
+                    idInput.name = "id";
+                    idInput.value = id;
+                    editForm.appendChild(idInput);
+                    
+                    let editButton = document.createElement("input");
+                    editButton.type = "submit";
+                    editButton.name = "edit";
+                    editButton.value = "Edit";
                     editButton.className = "inlineButton";
-                    editButton.textContent = "Edit Basic Features";
-                    editCell.appendChild(editButton);
+                    editForm.appendChild(editButton);
+                    
+                    editCell.appendChild(editForm);
                     newRow.appendChild(editCell);
                     
                     let deleteCell = document.createElement("td");
@@ -124,13 +139,11 @@ function displayCoastersTable () {
                     deleteForm.addEventListener('click', function(event) {
 
                         let current = id;
-                        /* TESTING ONLY */
-                        console.log("Calling deleteEntry on row id=" + id);
                         deleteEntry(current, event);
                         }
                     );
                     
-                    let idInput = document.createElement("input");
+                    idInput = document.createElement("input");
                     idInput.type = "hidden";
                     idInput.name = "id";
                     idInput.value = newRow.id;
@@ -217,6 +230,7 @@ function bindSearchButton () {
                         let newRow = document.createElement("tr");
 
                         newRow.id = row.id;
+                        let id = row.id;
 
                         let nameCell = document.createElement("td");
                         nameCell.textContent = row.name;
@@ -264,10 +278,30 @@ function bindSearchButton () {
                         newRow.appendChild(editCell);
 
                         let deleteCell = document.createElement("td");
-                        let deleteButton = document.createElement("button");
+                        let deleteForm = document.createElement("form");
+                        deleteForm.addEventListener('click', function(event) {
+
+                            let current = id;
+                            /* TESTING ONLY */
+                            console.log("Calling deleteEntry on row id=" + id);
+                            deleteEntry(current, event);
+                            }
+                        );
+                    
+                        let idInput = document.createElement("input");
+                        idInput.type = "hidden";
+                        idInput.name = "id";
+                        idInput.value = newRow.id;
+                        deleteForm.appendChild(idInput);
+
+                        let deleteButton = document.createElement("input");
+                        deleteButton.type = "submit";
+                        deleteButton.name = "delete";
+                        deleteButton.value = "Delete";
                         deleteButton.className = "inlineButton";
-                        deleteButton.textContent = "Delete";
-                        deleteCell.appendChild(deleteButton);
+                        deleteForm.appendChild(deleteButton);
+
+                        deleteCell.appendChild(deleteForm);
                         newRow.appendChild(deleteCell);
 
                         let specialFeaturesCell = document.createElement("td");
