@@ -5,7 +5,7 @@ const FLIP = 'http://flip3.engr.oregonstate.edu:';
 const PORT = '17994';
 
 /* Constant for redirect to coaster page. */
-const COASTER_REDIRECT = "http://web.engr.oregonstate.edu/~densmora/rcdb_testing/Roller_Coasters.html";
+const COASTER_REDIRECT = "http://web.engr.oregonstate.edu/~densmora/rcdb/Roller_Coasters.html";
 
 /* Extract id of this coaster from the query string in the URL and store in a global constant for access throughout this function */
 
