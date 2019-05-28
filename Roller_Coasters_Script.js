@@ -160,10 +160,24 @@ function displayCoastersTable () {
                     newRow.appendChild(deleteCell);
                     
                     let specialFeaturesCell = document.createElement("td");
-                    let specialFeaturesButton = document.createElement("button");
-                    specialFeaturesButton.className = "inlineButton";
-                    specialFeaturesButton.textContent = "Special Features";
-                    specialFeaturesCell.appendChild(specialFeaturesButton);
+
+let viewForm = document.createElement("form");
+                    
+                    viewForm.method = "get";
+                    viewForm.action = "Coaster_Features.html";
+                    
+                    idInput = document.createElement("input");
+                    idInput.type = "hidden";
+                    idInput.name = "id";
+                    idInput.value = id;
+                    viewForm.appendChild(idInput);
+                    
+                    let viewButton = document.createElement("input");
+                    viewButton.type = "submit";                    			   viewButton.value = "Special Features";
+                    viewButton.className = "inlineButton";
+                    viewForm.appendChild(viewButton);
+
+                    specialFeaturesCell.appendChild(viewForm);
                     newRow.appendChild(specialFeaturesCell);
                     document.getElementById("coaster_table_body").appendChild(newRow);
                 }

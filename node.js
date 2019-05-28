@@ -356,6 +356,22 @@ app.get('/add-coaster-feature-relationship',function(req,res,next){
   });
 });
 
+/* Create route to send JSON string of a specific coaster by coaster ID to client making request. */
+app.get('/select-this-coaster', function displayData(req, res, next) {   
+    mysql.pool.query("SELECT c.name, p.name AS park, m.name AS manufacturer, c.year_opened, c.height, c.max_speed, c.in_operation FROM rcdb_coaster c LEFT JOIN rcdb_park p ON c.park = p.id LEFT JOIN rcdb_manufacturer m ON c.manufacturer = m.id WHERE c.id = ?", req.query.id, function(err, rows, fields) {
+        if (err) {
+           next(err);
+           return;
+        }
+        var results = JSON.stringify(rows);
+        
+        /* Send JSON data back to the client that requested it. */
+        res.type("application/json");
+        res.send(results);
+    });
+});
+
+
 
 
 
