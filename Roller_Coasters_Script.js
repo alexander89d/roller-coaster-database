@@ -2,7 +2,7 @@
 const FLIP = 'http://flip3.engr.oregonstate.edu:';
 
 /* Constant for port number - can be changed to test on a different port */
-const PORT = '17994';
+const PORT = '7994';
 
 /* Display table data once DOM content has loaded */
 document.addEventListener("DOMContentLoaded", displayCoastersTable);
@@ -318,12 +318,26 @@ function bindSearchButton () {
                         deleteCell.appendChild(deleteForm);
                         newRow.appendChild(deleteCell);
 
-                        let specialFeaturesCell = document.createElement("td");
-                        let specialFeaturesButton = document.createElement("button");
-                        specialFeaturesButton.className = "inlineButton";
-                        specialFeaturesButton.textContent = "Special Features";
-                        specialFeaturesCell.appendChild(specialFeaturesButton);
-                        newRow.appendChild(specialFeaturesCell);
+                                            let specialFeaturesCell = document.createElement("td");
+
+                        let viewForm = document.createElement("form");
+                    
+                    viewForm.method = "get";
+                    viewForm.action = "Coaster_Features.html";
+                    
+                    idInput = document.createElement("input");
+                    idInput.type = "hidden";
+                    idInput.name = "id";
+                    idInput.value = id;
+                    viewForm.appendChild(idInput);
+                    
+                    let viewButton = document.createElement("input");
+                    viewButton.type = "submit";                    			   viewButton.value = "Special Features";
+                    viewButton.className = "inlineButton";
+                    viewForm.appendChild(viewButton);
+
+                    specialFeaturesCell.appendChild(viewForm);
+                    newRow.appendChild(specialFeaturesCell);
                         document.getElementById("coaster_table_body").appendChild(newRow);
                     }
                 }
