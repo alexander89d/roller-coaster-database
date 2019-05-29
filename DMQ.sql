@@ -113,5 +113,9 @@ rcdb_coaster_features.cid = @cid AND rcdb_coaster_features.fid = @fid;
 INSERT INTO rcdb_coaster_features (cid, fid)
 VALUES (@cid, @fid);
 
+-- Get information from the database for a particular roller 
+-- coaster, based off the roller coaster's ID
+SELECT c.name, p.name AS park, m.name AS manufacturer, c.year_opened, c.height, c.max_speed, c.in_operation FROM rcdb_coaster c LEFT JOIN rcdb_park p ON c.park = p.id LEFT JOIN rcdb_manufacturer m ON c.manufacturer = m.id WHERE c.id = @coaster_id
+
 
 
