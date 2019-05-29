@@ -127,7 +127,7 @@ function displayCoastersTable () {
                     let editButton = document.createElement("input");
                     editButton.type = "submit";
                     editButton.name = "edit";
-                    editButton.value = "Edit";
+                    editButton.value = "Edit Basic Features";
                     editButton.className = "inlineButton";
                     editForm.appendChild(editButton);
                     
@@ -161,7 +161,7 @@ function displayCoastersTable () {
                     
                     let specialFeaturesCell = document.createElement("td");
 
-let viewForm = document.createElement("form");
+                    let viewForm = document.createElement("form");
                     
                     viewForm.method = "get";
                     viewForm.action = "Coaster_Features.html";
@@ -285,10 +285,25 @@ function bindSearchButton () {
                         newRow.appendChild(inOperationCell);
 
                         let editCell = document.createElement("td");
-                        let editButton = document.createElement("button");
+                        let editForm = document.createElement("form");
+
+                        editForm.method = "get";
+                        editForm.action = "Edit_Coaster.html";
+
+                        let idInput = document.createElement("input");
+                        idInput.type = "hidden";
+                        idInput.name = "id";
+                        idInput.value = id;
+                        editForm.appendChild(idInput);
+
+                        let editButton = document.createElement("input");
+                        editButton.type = "submit";
+                        editButton.name = "edit";
+                        editButton.value = "Edit Basic Features";
                         editButton.className = "inlineButton";
-                        editButton.textContent = "Edit Basic Features";
-                        editCell.appendChild(editButton);
+                        editForm.appendChild(editButton);
+
+                        editCell.appendChild(editForm);
                         newRow.appendChild(editCell);
 
                         let deleteCell = document.createElement("td");
@@ -302,7 +317,7 @@ function bindSearchButton () {
                             }
                         );
                     
-                        let idInput = document.createElement("input");
+                        idInput = document.createElement("input");
                         idInput.type = "hidden";
                         idInput.name = "id";
                         idInput.value = newRow.id;
