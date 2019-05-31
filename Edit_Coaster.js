@@ -139,9 +139,17 @@ function updateCoaster (idIn) {
     
     let manufacturerIn = document.getElementById("manufacturerIn").value;
     
+    /* Validate that yearOpenedIn is between 1900 and current year. Get current year. */
+    
+    let currentDate = new Date();
+    let currentYear = currentDate.getFullYear();
+    
     let yearOpenedIn = document.getElementById("yearOpenedIn").value;
-    if (yearOpenedIn === "") {
-        document.getElementById("noYearIn").style.display = "block";
+    let yearOpenedNum = Number(yearOpenedIn);
+    if (yearOpenedIn === "" || yearOpenedNum < 1900 || yearOpenedNum > currentYear) {
+        let invalidYearMsg = document.getElementById("invalidYear");
+        invalidYearMsg.textContent = "The year in which the coaster opened must be between 1900 and " + currentYear.toString() + ".";
+        invalidYearMsg.style.display = "block";
         validInput = false;
     }
     

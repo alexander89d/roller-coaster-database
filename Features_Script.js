@@ -90,9 +90,9 @@ function addFeature () {
     reqBody = JSON.stringify(reqBody);
     
     req.addEventListener("load", function showTableAfterAdd() {
-        /* If there was no error, display rows. */
+        /* If there was no error, refresh page to display updated data. */
         if (req.status >= 200 && req.status < 400) {
-            displayFeaturesTable();
+            location.reload(true);
         }
         else {
             alert("An error occurred getting data from the server.");

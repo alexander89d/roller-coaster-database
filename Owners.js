@@ -114,12 +114,10 @@ function addEntry(event) {
 	var req = new XMLHttpRequest();
 	req.open('GET', FLIP + PORT + '/add-owner' + tail, true);
 	req.addEventListener('load',function(){
-	if(req.status >= 200 && req.status < 400){
-
-		loadTable();			
+	if(req.status >= 200 && req.status < 400){			
 	
 		event.preventDefault();
-		return;	
+		location.reload(true);
 
       } else {
         console.log("Error in network request: " + req.statusText);

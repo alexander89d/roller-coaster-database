@@ -425,7 +425,7 @@ function bindClearSearchButton() {
 /* Function to make an AJAX request to add a coaster. */
 function addCoaster () {
     document.getElementById("noNameIn").style.display = "none";
-    document.getElementById("noYearIn").style.display = "none";
+    document.getElementById("invalidYear").style.display = "none";
     document.getElementById("invalidHeight").style.display = "none";
     document.getElementById("invalidSpeed").style.display = "none";
     
@@ -448,9 +448,17 @@ function addCoaster () {
     
     let manufacturerIn = document.getElementById("manufacturerIn").value;
     
+    /* Validate that yearOpenedIn is between 1900 and current year. Get current year. */
+    
+    let currentDate = new Date();
+    let currentYear = currentDate.getFullYear();
+    
     let yearOpenedIn = document.getElementById("yearOpenedIn").value;
-    if (yearOpenedIn === "") {
-        document.getElementById("noYearIn").style.display = "block";
+    let yearOpenedNum = Number(yearOpenedIn);
+    if (yearOpenedIn === "" || yearOpenedNum < 1900 || yearOpenedNum > currentYear) {
+        let invalidYearMsg = document.getElementById("invalidYear");
+        invalidYearMsg.textContent = "The year in which the coaster opened must be between 1900 and " + currentYear.toString() + ".";
+        invalidYearMsg.style.display = "block";
         validInput = false;
     }
     
@@ -496,9 +504,9 @@ function addCoaster () {
         reqBody = JSON.stringify(reqBody);
 
         req.addEventListener("load", function showTableAfterAdd() {
-            /* If there was no error, display rows. */
+            /* If there was no error, refresh page to display updated data. */
             if (req.status >= 200 && req.status < 400) {
-                displayCoastersTable();
+                location.reload(true);
             }
             else {
                 alert("An error occurred submitting data to the server.");
@@ -525,9 +533,9 @@ function addCoaster () {
         reqBody = JSON.stringify(reqBody);
 
         req.addEventListener("load", function showTableAfterAdd() {
-            /* If there was no error, display rows. */
+            /* If there was no error, refresh page to display updated data. */
             if (req.status >= 200 && req.status < 400) {
-                displayCoastersTable();
+                location.reload(true);
             }
             else {
                 alert("An error occurred submitting data to the server.");

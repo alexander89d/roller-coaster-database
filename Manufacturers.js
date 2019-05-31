@@ -50,10 +50,8 @@ function addEntry(event) {
 	req.addEventListener('load',function(){
 	if(req.status >= 200 && req.status < 400){
 
-		loadTable();			
-	
 		event.preventDefault();
-		return;	
+		location.reload(true);
 
       } else {
         console.log("Error in network request: " + req.statusText);
