@@ -153,8 +153,15 @@ function loadTable() {
 
 		if(table.length === 0)
 		{
+
+			document.getElementById('noEntries').style.display = 'block';
+			document.getElementById('ParksTable').style.display = 'none';
 			return;
 		}
+
+		document.getElementById('noEntries').style.display = 'none';
+			document.getElementById('ParksTable').style.display = 'block';
+
 
 		// for each row in the park table, add the row to the HTML table
 		let length = table.length;

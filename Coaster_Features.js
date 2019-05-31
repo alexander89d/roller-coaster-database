@@ -147,8 +147,15 @@ function loadTable(ID) {
 
 		if(table.length === 0)
 		{
+			document.getElementById('noEntries').style.display = 'block';
+			document.getElementById('FeaturesTable').style.display = 'none';
+
 			return;
 		}
+		
+		document.getElementById('noEntries').style.display = 'none';
+			document.getElementById('FeaturesTable').style.display = 'block';
+
 
 		// for each feature related to the coaster, add the row to the HTML table
 		let length = table.length;
@@ -225,9 +232,22 @@ function addFeatures(ID) {
 		var response = JSON.parse(req.responseText);
 		let table = JSON.parse(response.results);
 
-		// for each row in the response, add the row to the  		
+		// for each row in the response, add the row to the  	
 		// selection dropdown
 		let length = table.length;
+
+		if(length === 0) {
+
+			document.getElementById('addfeature').disabled = true;
+			document.getElementById('noFeatures').style.display = 'block';
+			document.getElementById('addFeature').style.display = 'none';
+			return;
+		}
+
+		document.getElementById('addfeature').disabled = false;
+		document.getElementById('noFeatures').style.display = 'none';
+			document.getElementById('addFeature').style.display = 'block';
+
 
 		for(var i = 0; i < length; i++)	{
 
