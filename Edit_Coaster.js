@@ -18,7 +18,7 @@ let pos = 4;
 /* Read in id from queryString. */
 
 let id = "";
-while (queryString.charAt(pos) !== "&") {
+while (pos < queryString.length && queryString.charAt(pos) !== "&") {
     id += queryString.charAt(pos);
     pos++;
 }
@@ -71,8 +71,8 @@ function generateFormDropdowns() {
                         manufacturerOption.value = row.id;
                         manufacturerOption.textContent = row.name;
                         document.getElementById("manufacturerIn").appendChild(manufacturerOption);
-                        prefillForm();
                     }
+                    prefillForm();
                 }
                 else {
                     alert("An error occurred getting data from the server.");
@@ -95,8 +95,20 @@ function prefillForm() {
     req.addEventListener("load", function addRetrievedData() {
         /* If there was no error, prefill form with data. */
         if (req.status >= 200 && req.status < 400) {
-            let res = JSON.parse(req.responseText)[0];
+            let res = JSON.parse(req.responseText);
+            
+            /* If there is no coaster with COASTER_ID in the database, inform the user and redirect to coasters page. */
+            
+            if(res.length === 0) {
+                alert('No coaster with id ' + COASTER_ID + ' exists in the database. Please select "Edit Basic Features" next to a coaster on the "Coasters" page to edit a coaster currently in the database. Press "OK" to redirect to "Coasters" page...');
+                window.location.replace(COASTER_REDIRECT);
+                return;
+            }
 
+            /* If a result was returned, there should only be 1 row. Set res to res[0] for processing. */
+            
+            res = res[0];
+            
             document.getElementById("nameIn").value = res.name;
 
             /* If the park is not null, update the value of the "park" field with the correct park. */
