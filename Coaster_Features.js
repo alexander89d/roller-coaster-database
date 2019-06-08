@@ -4,6 +4,9 @@ const FLIP = 'http://flip3.engr.oregonstate.edu:';
 /* Constant for port number - can be changed to test on a different port */
 const PORT = '9896';
 
+/* Constant for redirect to coaster page. */
+const COASTER_REDIRECT = "http://web.engr.oregonstate.edu/~densmora/rcdb/Roller_Coasters.html";
+
 
 const urlParams = new URLSearchParams(window.location.search);
 const ID = urlParams.get('id');
@@ -42,6 +45,13 @@ function loadBasicFeatures(ID) {
         if (req.status >= 200 && req.status < 400) {
             let res = JSON.parse(req.responseText)[0];
 
+	   if (typeof res === 'undefined') {
+
+			alert('No coaster with id ' + ID + ' exists in the database. Please select "Special Features" next to a coaster on the "Coasters" page to view a coaster currently in the database. Press "OK" to redirect to "Coasters" page...');
+                window.location.replace(COASTER_REDIRECT);
+                return;
+
+	   }
             document.getElementById("coasterNameContent").innerHTML = "Name: " + res.name;
 
             /* If the park is not null, update the value of the "park" field with the correct park. */
@@ -130,6 +140,7 @@ function loadTable(ID) {
 	var tail = "?id=" + ID;
 
 	var req = new XMLHttpRequest();
+
 	req.open('POST', FLIP + PORT + '/select-features-for-coaster' + tail, true);
 	req.addEventListener('load',function(){
 	    if(req.status >= 200 && req.status < 400){
