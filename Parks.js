@@ -2,7 +2,7 @@
 const FLIP = 'http://flip3.engr.oregonstate.edu:';
 
 /* Constant for port number - can be changed to test on a different port */
-const PORT = '9896';
+const PORT = '7994';
 
 // function to load the table when the page has loaded
 document.addEventListener("DOMContentLoaded", pageSetup() );

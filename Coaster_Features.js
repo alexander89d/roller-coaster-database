@@ -2,7 +2,7 @@
 const FLIP = 'http://flip3.engr.oregonstate.edu:';
 
 /* Constant for port number - can be changed to test on a different port */
-const PORT = '9896';
+const PORT = '7994';
 
 /* Constant for redirect to coaster page. */
 const COASTER_REDIRECT = "http://web.engr.oregonstate.edu/~densmora/rcdb/Roller_Coasters.html";
