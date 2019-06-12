@@ -1,8 +1,3 @@
-/* URL for testing new features while peer reviewers are reviewing current version: http://web.engr.oregonstate.edu/~densmora/rcdb_testing/Index.html */
-
-/* To start forever: ./node_modules/forever/bin/forever start node.js [port_number] */
-/* To stop forever: ./node_modules/forever/bin/forever stop node.js */
-
 /* set up express */
 var express = require('express');
 var app = express();
@@ -43,7 +38,7 @@ app.get('/select-all-coasters', function displayData(req, res, next) {
     });
 });
 
-/* Create route to send JSON string of coaster search results data to client making request. */
+/* Create route to send JSON string of coaster search results data to client making request based on coaster name. */
 app.get('/search-coasters', function displayData(req, res, next) {   
     mysql.pool.query("SELECT c.id, c.name, p.name AS park, m.name AS manufacturer, c.year_opened, c.height, c.max_speed, c.in_operation FROM rcdb_coaster c LEFT JOIN rcdb_park p ON c.park = p.id LEFT JOIN rcdb_manufacturer m ON c.manufacturer = m.id WHERE c.name = ? ORDER BY c.name ASC", [req.query.name], function(err, rows, fields) {
         if (err) {
@@ -114,7 +109,7 @@ app.get('/select-all-parks', function displayData(req, res, next) {
     });
 });
 
-/* Create route to send JSON string of all park table data to client making get request. */
+/* Create route to send JSON string of all manufacturer table data to client making get request. */
 app.get('/select-all-manufacturers', function displayData(req, res, next) {   
     mysql.pool.query("SELECT * FROM rcdb_manufacturer ORDER BY name ASC", function(err, rows, fields) {
         if (err) {
@@ -129,7 +124,7 @@ app.get('/select-all-manufacturers', function displayData(req, res, next) {
     });
 });
 
-/* Create route to send JSON string of all manufacturers table data to client making request. */
+/* Create route to send JSON string of all manufacturers table data to client making post request. */
 app.post('/select-all-manufacturers',function(req, res, next){
     var context = {};
     mysql.pool.query('SELECT * FROM rcdb_manufacturer ORDER BY name ASC', function(err, rows, fields){
@@ -158,7 +153,7 @@ app.post('/select-all-owners',function(req, res, next){
 });
 
 
-/* Create route to send JSON string of all owners table data to client making request. */
+/* Create route to send JSON string of all park table data to client making post request. */
 app.post('/select-all-parks',function(req, res, next){
     var context = {};
     mysql.pool.query('SELECT P.id, P.name, P.city, P.state_province, P.country, PO.name AS owner FROM rcdb_park P INNER JOIN rcdb_park_owner PO ON PO.id = P.owner ORDER BY P.name ASC', function(err, rows, fields){

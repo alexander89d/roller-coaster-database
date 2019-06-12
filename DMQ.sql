@@ -44,9 +44,6 @@ VALUES (@name);
 -- Select all manufacturers in the database
 SELECT * FROM rcdb_manufacturer ORDER BY name ASC;
 
--- Get the names and id's of all manufacturers in the database
-SELECT name, id FROM rcdb_manufacturer;
-
 -- Insert a new manufacturer
 INSERT INTO rcdb_manufacturer (name, city, state_province, country)
 VALUES (@name, @city, @state_province, @country);
@@ -57,9 +54,6 @@ VALUES (@name, @city, @state_province, @country);
 
 -- Select all parks in the database
 SELECT P.id, P.name, P.city, P.state_province, P.country, PO.name AS owner FROM rcdb_park P INNER JOIN rcdb_park_owner PO ON PO.id = P.owner ORDER BY P.name ASC;
-
--- Get the names and id's of all parks in the database
-SELECT name, id from rcdb_park;
 
 -- Delete a park using its id
 DELETE FROM rcdb_park
@@ -94,10 +88,10 @@ WHERE CF.cid = @id;
 
 -- View all features that are not on a given roller coaster using 
 -- roller coaster id as @id
-SELECT F.name, F.id from rcdb_features F
+SELECT * FROM rcdb_features F
 WHERE F.id NOT IN 
 (
-SELECT F.id from rcdb_features F
+SELECT F.id FROM rcdb_features F
 INNER JOIN rcdb_coaster_features CF ON CF.fid = F.id
 WHERE CF.cid = @id
 );
