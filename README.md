@@ -22,6 +22,6 @@ In addition to submitting code for the frontend, server, and database, we were r
 The documentation is divided into the following sections:
 - Project Outline: This section includes a project overview, entity definitions, and entity attributes
 - ERD and Schema Diagrams
-- Changes Based on Feedback: This section includes text of all feedback from peers and graders that we received on Parts 1-6, indication of what changes we chose to make based on feedback (and reasoning why certin suggestions were not implemented), and descriptions of any additional changes we decided to make ourselves
+- Changes Based on Feedback: This section includes text of all feedback from peers and graders that we received on all previous project parts (Parts 1-6), indication of what changes we chose to make based on feedback (and reasoning why certain suggestions were not implemented), and descriptions of any additional changes we decided to make ourselves
 
 This documentation can be viewed at [https://alexdensmore.dev/projects/documentation/roller-coaster-database.pdf](https://alexdensmore.dev/projects/documentation/roller-coaster-database.pdf).
