@@ -13,7 +13,7 @@ Since this was a group project, see the [commits history](https://github.com/ale
 When making this repository public on GitHub, the files, which were originally all in the same folder on GitHub, were separated into the following three folders based on the major component to which they belonged. Each of these components was hosted separately.
 - [Fronted/](Frontend/): Contains the HTML, CSS, JavaScript, and image files for the frontend website.
 - [Server/](Server/): Contains the Node.js server code and the package.json file with dependencies.
-- [SQL/](SQL/): Contains the code generated through phpMyAdmin for cloning the database in [rcb_dump.sql](SQL/rcb_dump.sql) as well as drafts of all the necessary database queries in [DMQ.sql](SQL/DMQ.sql) (these queries are incorporated into the server's Node.js file).
+- [SQL/](SQL/): Contains the code generated through phpMyAdmin for cloning the database in [rcdb_dump.sql](SQL/rcdb_dump.sql) as well as drafts of all the necessary database queries in [DMQ.sql](SQL/DMQ.sql) (these queries are incorporated into the server's Node.js file).
 
 ## Documentation
 
